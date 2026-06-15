@@ -1,0 +1,83 @@
+{
+  "theme": "dark",
+  "archetype": "Performance Pro mixed with Comic Brutalism",
+  "mood": "High-energy, punchy, slightly exaggerated, motivating",
+  "color_palette": {
+    "background_base": "#09090B",
+    "background_surface": "#18181B",
+    "primary": "#FFE600",
+    "primary_foreground": "#000000",
+    "secondary": "#00E5FF",
+    "secondary_foreground": "#000000",
+    "accent": "#FF0055",
+    "muted": "#27272A",
+    "muted_foreground": "#A1A1AA",
+    "border": "#3F3F46",
+    "success": "#00FF66",
+    "error": "#FF0055"
+  },
+  "typography": {
+    "font_families": {
+      "heading": "Bebas Neue, sans-serif",
+      "body": "Outfit, sans-serif"
+    },
+    "scale": {
+      "h1": "text-5xl sm:text-6xl tracking-normal uppercase",
+      "h2": "text-3xl sm:text-4xl tracking-wide uppercase",
+      "h3": "text-2xl tracking-wide uppercase",
+      "h4": "text-xl tracking-wide uppercase",
+      "body": "text-base leading-relaxed",
+      "small": "text-sm tracking-wide"
+    }
+  },
+  "layout_spacing": {
+    "philosophy": "Dense, grid-based, hard edges with solid drop shadows to emulate comic panels.",
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "grid": "Bento-style Control Room (grid-cols-1 md:grid-cols-3 lg:grid-cols-4) with gap-4 or gap-6.",
+    "components": {
+      "cards": "bg-[#18181B] border-2 border-[#3F3F46] rounded-none p-6 shadow-[4px_4px_0px_0px_rgba(63,63,70,1)] transition-transform hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(255,230,0,1)] hover:border-[#FFE600]",
+      "buttons": "bg-[#FFE600] text-black border-2 border-[#FFE600] font-bold uppercase tracking-widest rounded-none py-3 px-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-y-[4px] active:translate-x-[4px] active:shadow-none",
+      "inputs": "bg-[#09090B] border-2 border-[#3F3F46] text-white focus:border-[#00E5FF] focus:ring-0 rounded-none p-3",
+      "badges": "bg-[#00E5FF] text-black font-bold uppercase px-3 py-1 text-xs border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+    }
+  },
+  "visual_enhancers": {
+    "texture": "Implement a subtle CSS halftone dot pattern on the body background. Use radial-gradient dots to give it that comic book print feel.",
+    "borders": "Thick 2px borders are mandatory on interactive elements to emulate comic inking.",
+    "icons": "Phosphor Icons (Bold weight) to match the thick comic strokes. Run: yarn add @phosphor-icons/react"
+  },
+  "pages": {
+    "auth": "Split-screen layout. Left side: The hero_auth_image with a heavy dark overlay or duotone effect. Right side: Solid #09090B background, heavy inputs, and a massive #FFE600 login button.",
+    "dashboard": "Bento grid layout. The 'Current Weight' and 'PRs' should feel like comic sound-effect panels (massive bold numbers, tight leading).",
+    "calendar": "Strict table grid. The 'Today' cell must be highlighted with a solid #FFE600 background and black text, overriding default Shadcn soft styles.",
+    "workout_logger": "High-visibility rows for sets/reps. Use #00E5FF to highlight the active/current set. Inputs should be boxy and utilitarian.",
+    "analytics": "Charts (Recharts) should use high-contrast neon lines (#FFE600, #00E5FF, #FF0055) against dark grid backgrounds. Avoid soft gradients; use solid strokes and fills."
+  },
+  "media": {
+    "hero_auth_image": {
+      "url": "https://images.pexels.com/photos/11433060/pexels-photo-11433060.jpeg",
+      "description": "Man performing bench press in a dimly lit gym, focused on weight training."
+    },
+    "dashboard_empty_state": {
+      "url": "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5",
+      "description": "grayscale photo of man working out"
+    },
+    "avatar_placeholder": {
+      "url": "https://images.unsplash.com/photo-1754476151319-bc8cf50a1807",
+      "description": "A man smiles, posing in a studio."
+    }
+  },
+  "accessibility_and_testing": {
+    "contrast": "Ensure black text is used on #FFE600 (Yellow) and #00E5FF (Cyan) backgrounds. White text on #18181B cards.",
+    "focus": "Focus states must be explicitly styled with a 2px #00E5FF ring.",
+    "data_testid": "CRITICAL: All interactive elements (buttons, inputs, toggles, calendar days, workout list items) MUST include a 'data-testid' attribute (e.g., data-testid='login-submit-button')."
+  },
+  "instructions_to_main_agent": [
+    "Install necessary dependencies: yarn add @phosphor-icons/react recharts",
+    "Modify tailwind.config.js to include the custom color palette (primary: #FFE600, secondary: #00E5FF, accent: #FF0055).",
+    "Set font imports in index.html or index.css via Google Fonts: <link href=\"https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600;800&display=swap\" rel=\"stylesheet\">",
+    "Update Shadcn UI primitives to have `rounded-none` and apply the hard shadow classes mentioned in layout_spacing.components.",
+    "Do NOT use standard soft shadows (shadow-md, shadow-lg). Replace them with solid drop shadows like shadow-[4px_4px_0px_0px_rgba(63,63,70,1)].",
+    "Add a CSS-based halftone pattern to index.css body: `background-image: radial-gradient(#3F3F46 1px, transparent 1px); background-size: 8px 8px;`"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "summary": "First-finish smoke test of Gym Progress Tracker passed end-to-end. Backend auth, exercises, workouts, body-weight, stats endpoints respond correctly. Frontend full flow (register, login, create exercise, log+complete workout, log body weight, dashboard aggregation, history, calendar, analytics, settings unit switch, logout, protected route) all verified.",
+  "tested_scope": ["backend", "frontend", "auth", "integration"],
+  "passed": [
+    "POST /api/auth/login (admin & test user) returns JWT token + user payload",
+    "GET /api/auth/me returns current user; reflects unit preference",
+    "POST /api/exercises creates custom exercise; GET /api/exercises lists it",
+    "GET /api/workouts and /api/body-weight return 200 with arrays",
+    "GET /api/stats/streak returns streak payload (current/longest/weekly_counts)",
+    "PATCH /api/auth/units persists units=lbs (verified via /auth/me after UI save)",
+    "Frontend /register -> creates user and redirects to dashboard (screenshot confirmed)",
+    "Frontend /login with test@gymtracker.com -> lands on dashboard",
+    "/exercises: create custom exercise 'T1Bench' visible in list",
+    "/body-weight: add 76.3 entry visible in list and reflected on dashboard (Body Weight 76.3 kg)",
+    "/log: create workout 'T1 Push Day', pick exercise from picker, fill set weight/reps, save -> navigates to /log/:id",
+    "/log/:id: 'Complete' button completes workout; dashboard shows Total Workouts=1, Streak=1d, PRs=T1Bench 60kg x 8 (76 1RM), Recent contains 'T1 Push Day'",
+    "/history shows the completed workout",
+    "/calendar and /analytics pages render without runtime errors",
+    "/settings: switch to lbs and save -> persisted on backend (verified via /auth/me returning units=lbs)",
+    "Logout clears session and redirects to /login",
+    "Protected route /dashboard redirects to /login when logged out"
+  ],
+  "failed": [],
+  "action_items": [
+    "Minor (non-blocking): /api/stats/summary does not exist; backend exposes /api/stats/dashboard, /streak, /muscle-groups, /strength-progression. Update problem statement reference if needed; no code change required.",
+    "Minor (non-blocking): In Settings, radio uses Radix attribute data-state but visual selection state could not be probed via plain checked attribute; backend persistence confirmed."
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "retest_needed": false,
+  "full_testing_deferred": true
+}
