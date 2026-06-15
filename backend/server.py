@@ -290,8 +290,6 @@ async def get_workout(wid: str, user: dict = Depends(get_current_user)):
 @api.patch("/workouts/{wid}")
 async def update_workout(wid: str, body: WorkoutUpdate, user: dict = Depends(get_current_user)):
     update = {k: v for k, v in body.model_dump(exclude_unset=True).items()}
-    if "exercises" in update and update["exercises"] is not None:
-        update["exercises"] = update["exercises"]
     update["updated_at"] = datetime.now(timezone.utc).isoformat()
     res = await db.workouts.update_one({"id": wid, "user_id": user["id"]}, {"$set": update})
     if res.matched_count == 0:
@@ -533,3 +531,8 @@ async def on_startup():
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+
+if __name__ == "__main__":
+    import uvicorn
+    # Allows running the server via 'python server.py'
+    uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=True)

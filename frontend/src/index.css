@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+    background-color: #09090b;
+    color: #fafafa;
+}
+
+body {
+    margin: 0;
+    font-family: "Outfit", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: radial-gradient(#1f1f24 1px, transparent 1px);
+    background-size: 14px 14px;
+    background-attachment: fixed;
+}
+
+@layer base {
+    :root {
+        /* dark theme defaults - we always run in dark mode */
+        --background: 240 6% 5%;
+        --foreground: 0 0% 98%;
+        --card: 240 4% 11%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 4% 11%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 54 100% 50%;
+        --primary-foreground: 0 0% 0%;
+        --secondary: 187 100% 50%;
+        --secondary-foreground: 0 0% 0%;
+        --muted: 240 4% 16%;
+        --muted-foreground: 240 5% 65%;
+        --accent: 339 100% 50%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 339 100% 50%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 240 4% 26%;
+        --input: 240 4% 16%;
+        --ring: 187 100% 50%;
+        --radius: 0px;
+        --chart-1: 54 100% 50%;
+        --chart-2: 187 100% 50%;
+        --chart-3: 339 100% 50%;
+        --chart-4: 137 100% 50%;
+        --chart-5: 270 100% 65%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply text-foreground;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: "Bebas Neue", Impact, sans-serif;
+        letter-spacing: 0.02em;
+    }
+    ::selection {
+        background-color: #ffe600;
+        color: #000;
+    }
+}
+
+@layer utilities {
+    .font-display {
+        font-family: "Bebas Neue", Impact, sans-serif;
+    }
+    .panel {
+        @apply bg-[#18181B] border-2 border-[#3F3F46] shadow-comic-line;
+    }
+    .panel-hover {
+        @apply transition-all duration-150 hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-comic-yellow hover:border-brand-yellow;
+    }
+    .btn-comic {
+        @apply inline-flex items-center justify-center gap-2 bg-brand-yellow text-black font-bold uppercase tracking-wider border-2 border-black px-5 py-3 shadow-comic transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:translate-x-[4px] active:translate-y-[4px];
+    }
+    .btn-comic-cyan {
+        @apply inline-flex items-center justify-center gap-2 bg-brand-cyan text-black font-bold uppercase tracking-wider border-2 border-black px-5 py-3 shadow-comic transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:translate-x-[4px] active:translate-y-[4px];
+    }
+    .btn-comic-outline {
+        @apply inline-flex items-center justify-center gap-2 bg-transparent text-white font-bold uppercase tracking-wider border-2 border-[#3F3F46] px-5 py-3 shadow-comic-line transition-all hover:border-brand-yellow hover:shadow-comic-yellow hover:-translate-y-[2px];
+    }
+    .input-comic {
+        @apply w-full bg-[#09090B] border-2 border-[#3F3F46] text-white placeholder:text-[#52525B] focus:outline-none focus:border-brand-cyan px-3 py-2.5;
+    }
+    .tag-comic {
+        @apply inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-[#27272A] text-white border-2 border-black px-2 py-0.5;
+    }
+}
+
+/* Recharts tooltip dark fix */
+.recharts-default-tooltip {
+    background-color: #18181b !important;
+    border: 2px solid #3f3f46 !important;
+    color: #fff !important;
+}
