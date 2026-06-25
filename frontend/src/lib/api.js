@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-export const API_BASE = `${BACKEND_URL}/api`;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+export const API_BASE = BACKEND_URL.endsWith("/api")
+  ? BACKEND_URL.replace(/\/$/, "")
+  : `${BACKEND_URL.replace(/\/$/, "")}/api`;
 
 const api = axios.create({
   baseURL: API_BASE,
@@ -25,7 +27,11 @@ export function formatApiError(detail) {
       .map((e) => (e && typeof e.msg === "string" ? e.msg : JSON.stringify(e)))
       .filter(Boolean)
       .join(" ");
-  if (detail && typeof detail.msg === "string") return detail.msg;
+  if (detail && typeof detail === "object") {
+    if (typeof detail.msg === "string") return detail.msg;
+    if (typeof detail.message === "string") return detail.message;
+    if (typeof detail.detail === "string") return detail.detail;
+  }
   return String(detail);
 }
 

@@ -9,17 +9,36 @@ from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
+
+# -------- DB ----------
+
+def get_mongo_url() -> str:
+    mongo_url = os.environ.get('MONGO_URL', '').strip()
+    if not mongo_url:
+        raise RuntimeError(
+            'MONGO_URL is missing. Set MONGO_URL in backend/.env or your environment.'
+        )
+    if '<db_password>' in mongo_url or 'password' in mongo_url and '<' in mongo_url:
+        raise RuntimeError(
+            'MONGO_URL contains placeholder credentials. Replace <db_password> with your Atlas password.'
+        )
+    return mongo_url
+
+mongo_url = get_mongo_url()
+client = AsyncIOMotorClient(
+    mongo_url,
+    tls=True,
+    serverSelectionTimeoutMS=10000,
+    connectTimeoutMS=10000,
+    socketTimeoutMS=20000,
+)
+db = client[os.environ.get('DB_NAME', 'test_database')]
 import bcrypt
 import jwt
 import uuid
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional, Literal
 from datetime import datetime, timezone, timedelta, date
-
-# -------- DB ----------
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
 
 # -------- App ---------
 app = FastAPI()
@@ -487,10 +506,24 @@ app.include_router(api)
 
 # CORS
 frontend_url = os.environ.get("FRONTEND_URL", "http://localhost:3000")
+raw_cors_origins = os.environ.get("CORS_ORIGINS", "").strip()
+allowed_origins = {frontend_url, "http://localhost:3000"}
+parsed_origins = [origin.strip() for origin in raw_cors_origins.split(",") if origin.strip()]
+for origin in parsed_origins:
+    if origin == "*":
+        continue
+    allowed_origins.add(origin)
+
+allowed_origins = list(allowed_origins)
+allow_credentials = True
+if not allowed_origins:
+    allowed_origins = ["*"]
+    allow_credentials = False
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[frontend_url, "http://localhost:3000"],
-    allow_credentials=True,
+    allow_origins=allowed_origins,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )

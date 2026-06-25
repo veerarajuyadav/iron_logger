@@ -61,21 +61,34 @@ let webpackConfig = {
 };
 
 webpackConfig.devServer = (devServerConfig) => {
-  // Add health check endpoints if enabled
-  if (config.enableHealthCheck && setupHealthEndpoints && healthPluginInstance) {
-    const originalSetupMiddlewares = devServerConfig.setupMiddlewares;
+  // Convert CRA's deprecated dev-server hooks to setupMiddlewares
+  const beforeHook = devServerConfig.onBeforeSetupMiddleware;
+  const afterHook = devServerConfig.onAfterSetupMiddleware;
+  const originalSetupMiddlewares = devServerConfig.setupMiddlewares;
 
+  if (typeof beforeHook === 'function' || typeof afterHook === 'function' || config.enableHealthCheck) {
     devServerConfig.setupMiddlewares = (middlewares, devServer) => {
-      // Call original setup if exists
-      if (originalSetupMiddlewares) {
+      if (typeof beforeHook === 'function') {
+        beforeHook(devServer);
+      }
+
+      if (typeof originalSetupMiddlewares === 'function') {
         middlewares = originalSetupMiddlewares(middlewares, devServer);
       }
 
-      // Setup health endpoints
-      setupHealthEndpoints(devServer, healthPluginInstance);
+      if (config.enableHealthCheck && setupHealthEndpoints && healthPluginInstance) {
+        setupHealthEndpoints(devServer, healthPluginInstance);
+      }
+
+      if (typeof afterHook === 'function') {
+        afterHook(devServer);
+      }
 
       return middlewares;
     };
+
+    delete devServerConfig.onBeforeSetupMiddleware;
+    delete devServerConfig.onAfterSetupMiddleware;
   }
 
   return devServerConfig;

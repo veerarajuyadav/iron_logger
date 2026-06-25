@@ -29,7 +29,8 @@ export function AuthProvider({ children }) {
       setUser(data);
       return { ok: true };
     } catch (e) {
-      return { ok: false, error: formatApiError(e.response?.data?.detail) || e.message };
+      const errorPayload = e.response?.data?.detail ?? e.response?.data;
+      return { ok: false, error: formatApiError(errorPayload) || e.message };
     }
   };
 
@@ -40,7 +41,8 @@ export function AuthProvider({ children }) {
       setUser(data);
       return { ok: true };
     } catch (e) {
-      return { ok: false, error: formatApiError(e.response?.data?.detail) || e.message };
+      const errorPayload = e.response?.data?.detail ?? e.response?.data;
+      return { ok: false, error: formatApiError(errorPayload) || e.message };
     }
   };
 
