@@ -100,6 +100,15 @@ async def ensure_db():
             socketTimeoutMS=20000,
         )
         db = client[os.environ.get('DB_NAME', 'test_database')]
+        # verify we can talk to the server now; raise if not reachable
+        try:
+            await client.admin.command('ping')
+        except Exception as exc:
+            try:
+                client.close()
+            except Exception:
+                pass
+            raise DatabaseUnavailable(f'Database connection failed: {exc}') from exc
         return db
     except Exception as exc:
         raise DatabaseUnavailable(f'Database connection failed: {exc}') from exc
@@ -144,11 +153,21 @@ def create_access_token(user_id: str, email: str) -> str:
 
 
 def set_auth_cookie(response: Response, token: str) -> None:
+    # determine secure flag: use explicit COOKIE_SECURE env, or enable in Vercel/HTTPS
+    cookie_secure_env = os.environ.get("COOKIE_SECURE", "").lower()
+    if cookie_secure_env in ("1", "true", "yes"):
+        secure_flag = True
+    elif cookie_secure_env in ("0", "false", "no"):
+        secure_flag = False
+    else:
+        # enable secure cookies when running on Vercel or when FRONTEND_URL is https
+        secure_flag = bool(os.environ.get("VERCEL", "")) or os.environ.get("FRONTEND_URL", "").startswith("https")
+
     response.set_cookie(
         key="access_token",
         value=token,
         httponly=True,
-        secure=False,
+        secure=secure_flag,
         samesite="lax",
         max_age=60 * 60 * 24 * 7,
         path="/",
@@ -603,6 +622,8 @@ async def stats_strength_progression(exercise_name: str, user: dict = Depends(ge
 
 # Mount router
 app.include_router(api)
+# also accept requests forwarded with the monorepo route prefix
+app.include_router(api, prefix="/_/backend/api")
 
 # CORS
 frontend_url = os.environ.get("FRONTEND_URL", "http://localhost:3000")
