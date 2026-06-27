@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+const FALLBACK_BACKEND_URL =
+  typeof window !== "undefined" ? `${window.location.origin}/_/backend` : "/_/backend";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || FALLBACK_BACKEND_URL;
 export const API_BASE = BACKEND_URL.endsWith("/api")
   ? BACKEND_URL.replace(/\/$/, "")
   : `${BACKEND_URL.replace(/\/$/, "")}/api`;

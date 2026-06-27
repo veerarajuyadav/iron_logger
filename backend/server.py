@@ -12,27 +12,56 @@ import logging
 
 # -------- DB ----------
 
+class DatabaseUnavailable(RuntimeError):
+    pass
+
+
+class UnavailableDB:
+    def __bool__(self) -> bool:
+        return False
+
+    def __getattr__(self, name: str):
+        raise DatabaseUnavailable("Database is unavailable")
+
+
 def get_mongo_url() -> str:
     mongo_url = os.environ.get('MONGO_URL', '').strip()
     if not mongo_url:
-        raise RuntimeError(
-            'MONGO_URL is missing. Set MONGO_URL in backend/.env or your environment.'
-        )
+        return ''
     if '<db_password>' in mongo_url or 'password' in mongo_url and '<' in mongo_url:
         raise RuntimeError(
             'MONGO_URL contains placeholder credentials. Replace <db_password> with your Atlas password.'
         )
     return mongo_url
 
-mongo_url = get_mongo_url()
-client = AsyncIOMotorClient(
-    mongo_url,
-    tls=True,
-    serverSelectionTimeoutMS=10000,
-    connectTimeoutMS=10000,
-    socketTimeoutMS=20000,
-)
-db = client[os.environ.get('DB_NAME', 'test_database')]
+
+client = None
+db = UnavailableDB()
+
+
+async def ensure_db():
+    global client, db
+    if client is not None and db is not None and not isinstance(db, UnavailableDB):
+        return db
+
+    mongo_url = get_mongo_url()
+    if not mongo_url:
+        raise DatabaseUnavailable('MONGO_URL is missing. Set MONGO_URL in backend/.env or your environment.')
+
+    try:
+        client = AsyncIOMotorClient(
+            mongo_url,
+            tls=True,
+            serverSelectionTimeoutMS=10000,
+            connectTimeoutMS=10000,
+            socketTimeoutMS=20000,
+        )
+        db = client[os.environ.get('DB_NAME', 'test_database')]
+        return db
+    except Exception as exc:
+        raise DatabaseUnavailable(f'Database connection failed: {exc}') from exc
+
+
 import bcrypt
 import jwt
 import uuid
@@ -48,7 +77,7 @@ JWT_ALGORITHM = "HS256"
 
 
 def get_jwt_secret() -> str:
-    return os.environ["JWT_SECRET"]
+    return os.environ.get("JWT_SECRET", "dev-secret-change-me")
 
 
 # ---------- Helpers ----------
@@ -169,6 +198,17 @@ class WorkoutUpdate(BaseModel):
 class BodyWeightIn(BaseModel):
     date: str  # YYYY-MM-DD
     weight: float
+
+
+# ---------- Health ----------
+@app.get("/healthz")
+async def healthz():
+    return {"status": "ok", "database": "ready" if not isinstance(db, UnavailableDB) else "unavailable"}
+
+
+@app.exception_handler(DatabaseUnavailable)
+async def database_unavailable_handler(request: Request, exc: DatabaseUnavailable):
+    return Response(content='{"detail":"Database unavailable"}', status_code=503, media_type='application/json')
 
 
 # ---------- Auth Routes ----------
@@ -535,35 +575,42 @@ logger = logging.getLogger(__name__)
 
 @app.on_event("startup")
 async def on_startup():
-    await db.users.create_index("email", unique=True)
-    await db.workouts.create_index([("user_id", 1), ("date", -1)])
-    await db.body_weights.create_index([("user_id", 1), ("date", -1)], unique=True)
-    await db.exercises.create_index([("user_id", 1), ("name", 1)])
+    try:
+        await ensure_db()
+        await db.users.create_index("email", unique=True)
+        await db.workouts.create_index([("user_id", 1), ("date", -1)])
+        await db.body_weights.create_index([("user_id", 1), ("date", -1)], unique=True)
+        await db.exercises.create_index([("user_id", 1), ("name", 1)])
 
-    # seed admin
-    admin_email = os.environ.get("ADMIN_EMAIL", "admin@gymtracker.com").lower()
-    admin_password = os.environ.get("ADMIN_PASSWORD", "admin123")
-    existing = await db.users.find_one({"email": admin_email})
-    if not existing:
-        await db.users.insert_one(
-            {
-                "id": str(uuid.uuid4()),
-                "email": admin_email,
-                "name": "Admin",
-                "password_hash": hash_password(admin_password),
-                "units": "kg",
-                "created_at": datetime.now(timezone.utc).isoformat(),
-            }
-        )
-    elif not verify_password(admin_password, existing["password_hash"]):
-        await db.users.update_one(
-            {"email": admin_email}, {"$set": {"password_hash": hash_password(admin_password)}}
-        )
+        # seed admin
+        admin_email = os.environ.get("ADMIN_EMAIL", "admin@gymtracker.com").lower()
+        admin_password = os.environ.get("ADMIN_PASSWORD", "admin123")
+        existing = await db.users.find_one({"email": admin_email})
+        if not existing:
+            await db.users.insert_one(
+                {
+                    "id": str(uuid.uuid4()),
+                    "email": admin_email,
+                    "name": "Admin",
+                    "password_hash": hash_password(admin_password),
+                    "units": "kg",
+                    "created_at": datetime.now(timezone.utc).isoformat(),
+                }
+            )
+        elif not verify_password(admin_password, existing["password_hash"]):
+            await db.users.update_one(
+                {"email": admin_email}, {"$set": {"password_hash": hash_password(admin_password)}}
+            )
+    except DatabaseUnavailable as exc:
+        logger.warning("Database unavailable during startup: %s", exc)
+    except Exception as exc:
+        logger.exception("Unexpected startup error: %s", exc)
 
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
-    client.close()
+    if client is not None:
+        client.close()
 
 if __name__ == "__main__":
     import uvicorn
