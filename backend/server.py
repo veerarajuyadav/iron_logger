@@ -173,6 +173,8 @@ async def get_current_user(request: Request) -> dict:
         user.pop("_id", None)
         user.pop("password_hash", None)
         return user
+    except DatabaseUnavailable as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Token expired")
     except jwt.InvalidTokenError:
@@ -258,43 +260,55 @@ async def database_unavailable_handler(request: Request, exc: DatabaseUnavailabl
 # ---------- Auth Routes ----------
 @api.post("/auth/register")
 async def register(req: RegisterReq, response: Response):
-    await ensure_db()
-    email = req.email.lower()
-    existing = await db.users.find_one({"email": email})
-    if existing:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    user_id = str(uuid.uuid4())
-    doc = {
-        "id": user_id,
-        "email": email,
-        "name": req.name,
-        "password_hash": hash_password(req.password),
-        "units": "kg",
-        "created_at": datetime.now(timezone.utc).isoformat(),
-    }
-    await db.users.insert_one(doc)
-    token = create_access_token(user_id, email)
-    set_auth_cookie(response, token)
-    return {"id": user_id, "email": email, "name": req.name, "units": "kg", "created_at": doc["created_at"], "token": token}
+    try:
+        await ensure_db()
+        email = req.email.lower()
+        existing = await db.users.find_one({"email": email})
+        if existing:
+            raise HTTPException(status_code=400, detail="Email already registered")
+        user_id = str(uuid.uuid4())
+        doc = {
+            "id": user_id,
+            "email": email,
+            "name": req.name,
+            "password_hash": hash_password(req.password),
+            "units": "kg",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        }
+        await db.users.insert_one(doc)
+        token = create_access_token(user_id, email)
+        set_auth_cookie(response, token)
+        return {"id": user_id, "email": email, "name": req.name, "units": "kg", "created_at": doc["created_at"], "token": token}
+    except DatabaseUnavailable as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except Exception as exc:
+        logger.exception("Registration failed")
+        raise HTTPException(status_code=500, detail="Registration failed") from exc
 
 
 @api.post("/auth/login")
 async def login(req: LoginReq, response: Response):
-    await ensure_db()
-    email = req.email.lower()
-    user = await db.users.find_one({"email": email})
-    if not user or not verify_password(req.password, user["password_hash"]):
-        raise HTTPException(status_code=401, detail="Invalid email or password")
-    token = create_access_token(user["id"], email)
-    set_auth_cookie(response, token)
-    return {
-        "id": user["id"],
-        "email": user["email"],
-        "name": user["name"],
-        "units": user.get("units", "kg"),
-        "created_at": user["created_at"],
-        "token": token,
-    }
+    try:
+        await ensure_db()
+        email = req.email.lower()
+        user = await db.users.find_one({"email": email})
+        if not user or not verify_password(req.password, user["password_hash"]):
+            raise HTTPException(status_code=401, detail="Invalid email or password")
+        token = create_access_token(user["id"], email)
+        set_auth_cookie(response, token)
+        return {
+            "id": user["id"],
+            "email": user["email"],
+            "name": user["name"],
+            "units": user.get("units", "kg"),
+            "created_at": user["created_at"],
+            "token": token,
+        }
+    except DatabaseUnavailable as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except Exception as exc:
+        logger.exception("Login failed")
+        raise HTTPException(status_code=500, detail="Login failed") from exc
 
 
 @api.post("/auth/logout")
