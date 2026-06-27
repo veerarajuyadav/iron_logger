@@ -78,6 +78,13 @@ def get_mongo_url() -> str:
     return mongo_url
 
 
+def _bool_env(name: str, default: bool = False) -> bool:
+    value = os.environ.get(name, None)
+    if value is None:
+        return default
+    return value.strip().lower() in ('1', 'true', 'yes', 'on')
+
+
 client = None
 db = UnavailableDB()
 
@@ -100,19 +107,24 @@ async def ensure_db():
     if not mongo_url:
         raise DatabaseUnavailable('MONGO_URL is missing. Set MONGO_URL in backend/.env or your environment.')
 
+    connection_kwargs = {
+        'tls': True,
+        'serverSelectionTimeoutMS': 10000,
+        'connectTimeoutMS': 10000,
+        'socketTimeoutMS': 20000,
+    }
+    if _bool_env('MONGO_TLS_ALLOW_INVALID_CERTS'):
+        connection_kwargs['tlsAllowInvalidCertificates'] = True
+    if _bool_env('MONGO_TLS_ALLOW_INVALID_HOSTNAMES'):
+        connection_kwargs['tlsAllowInvalidHostnames'] = True
+
     try:
         if client is not None:
             try:
                 client.close()
             except Exception:
                 pass
-        client = AsyncIOMotorClient(
-            mongo_url,
-            tls=True,
-            serverSelectionTimeoutMS=10000,
-            connectTimeoutMS=10000,
-            socketTimeoutMS=20000,
-        )
+        client = AsyncIOMotorClient(mongo_url, **connection_kwargs)
         db = client[os.environ.get('DB_NAME', 'test_database')]
         try:
             await client.admin.command('ping')
@@ -289,7 +301,11 @@ class BodyWeightIn(BaseModel):
 # ---------- Health ----------
 @app.get("/healthz")
 async def healthz():
-    return {"status": "ok", "database": "ready" if not isinstance(db, UnavailableDB) else "unavailable"}
+    try:
+        await ensure_db()
+        return {"status": "ok", "database": "ready"}
+    except DatabaseUnavailable:
+        return Response(content='{"status":"ok","database":"unavailable"}', status_code=503, media_type='application/json')
 
 
 @app.exception_handler(DatabaseUnavailable)
