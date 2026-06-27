@@ -85,13 +85,27 @@ db = UnavailableDB()
 async def ensure_db():
     global client, db
     if client is not None and db is not None and not isinstance(db, UnavailableDB):
-        return db
+        try:
+            await client.admin.command('ping')
+            return db
+        except Exception:
+            try:
+                client.close()
+            except Exception:
+                pass
+            client = None
+            db = UnavailableDB()
 
     mongo_url = get_mongo_url()
     if not mongo_url:
         raise DatabaseUnavailable('MONGO_URL is missing. Set MONGO_URL in backend/.env or your environment.')
 
     try:
+        if client is not None:
+            try:
+                client.close()
+            except Exception:
+                pass
         client = AsyncIOMotorClient(
             mongo_url,
             tls=True,
@@ -100,7 +114,6 @@ async def ensure_db():
             socketTimeoutMS=20000,
         )
         db = client[os.environ.get('DB_NAME', 'test_database')]
-        # verify we can talk to the server now; raise if not reachable
         try:
             await client.admin.command('ping')
         except Exception as exc:
@@ -108,9 +121,13 @@ async def ensure_db():
                 client.close()
             except Exception:
                 pass
+            client = None
+            db = UnavailableDB()
             raise DatabaseUnavailable(f'Database connection failed: {exc}') from exc
         return db
     except Exception as exc:
+        client = None
+        db = UnavailableDB()
         raise DatabaseUnavailable(f'Database connection failed: {exc}') from exc
 
 
