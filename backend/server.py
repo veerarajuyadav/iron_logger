@@ -7,6 +7,8 @@ load_dotenv(ROOT_DIR / '.env')
 from fastapi import FastAPI, APIRouter, HTTPException, Request, Response, Depends
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo.errors import ServerSelectionTimeoutError
+import certifi
 import os
 import logging
 
@@ -109,6 +111,7 @@ async def ensure_db():
 
     connection_kwargs = {
         'tls': True,
+        'tlsCAFile': certifi.where(),
         'serverSelectionTimeoutMS': 10000,
         'connectTimeoutMS': 10000,
         'socketTimeoutMS': 20000,
@@ -117,27 +120,65 @@ async def ensure_db():
         connection_kwargs['tlsAllowInvalidCertificates'] = True
     if _bool_env('MONGO_TLS_ALLOW_INVALID_HOSTNAMES'):
         connection_kwargs['tlsAllowInvalidHostnames'] = True
+    if _bool_env('MONGO_TLS_INSECURE'):
+        connection_kwargs['tlsInsecure'] = True
 
-    try:
+    async def _connect_with_kwargs(url: str, kwargs: dict):
+        global client, db
         if client is not None:
             try:
                 client.close()
             except Exception:
                 pass
-        client = AsyncIOMotorClient(mongo_url, **connection_kwargs)
+        client = AsyncIOMotorClient(url, **kwargs)
         db = client[os.environ.get('DB_NAME', 'test_database')]
-        try:
-            await client.admin.command('ping')
-        except Exception as exc:
-            try:
-                client.close()
-            except Exception:
-                pass
-            client = None
-            db = UnavailableDB()
-            raise DatabaseUnavailable(f'Database connection failed: {exc}') from exc
+        await client.admin.command('ping')
         return db
+
+    try:
+        return await _connect_with_kwargs(mongo_url, connection_kwargs)
+    except ServerSelectionTimeoutError as exc:
+        if 'SSL handshake failed' in str(exc):
+            if not connection_kwargs.get('tlsAllowInvalidCertificates') and not connection_kwargs.get('tlsInsecure'):
+                logger.warning('MongoDB SSL handshake failed, retrying with invalid certificate/hostname allowances.')
+                connection_kwargs['tlsAllowInvalidCertificates'] = True
+                connection_kwargs['tlsAllowInvalidHostnames'] = True
+                try:
+                    return await _connect_with_kwargs(mongo_url, connection_kwargs)
+                except Exception as exc2:
+                    try:
+                        client.close()
+                    except Exception:
+                        pass
+                    client = None
+                    db = UnavailableDB()
+                    raise DatabaseUnavailable(f'Database connection failed: {exc2}') from exc2
+            if not connection_kwargs.get('tlsInsecure'):
+                logger.warning('MongoDB SSL handshake failed, retrying with tlsInsecure enabled.')
+                insecure_kwargs = {k: v for k, v in connection_kwargs.items() if k not in ('tlsAllowInvalidCertificates', 'tlsAllowInvalidHostnames')}
+                insecure_kwargs['tlsInsecure'] = True
+                try:
+                    return await _connect_with_kwargs(mongo_url, insecure_kwargs)
+                except Exception as exc2:
+                    try:
+                        client.close()
+                    except Exception:
+                        pass
+                    client = None
+                    db = UnavailableDB()
+                    raise DatabaseUnavailable(f'Database connection failed: {exc2}') from exc2
+        try:
+            client.close()
+        except Exception:
+            pass
+        client = None
+        db = UnavailableDB()
+        raise DatabaseUnavailable(f'Database connection failed: {exc}') from exc
     except Exception as exc:
+        try:
+            client.close()
+        except Exception:
+            pass
         client = None
         db = UnavailableDB()
         raise DatabaseUnavailable(f'Database connection failed: {exc}') from exc
