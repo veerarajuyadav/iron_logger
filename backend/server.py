@@ -16,12 +16,55 @@ class DatabaseUnavailable(RuntimeError):
     pass
 
 
+class UnavailableCursor:
+    def sort(self, *args, **kwargs):
+        return self
+
+    def limit(self, *args, **kwargs):
+        return self
+
+    def to_list(self, *args, **kwargs):
+        raise DatabaseUnavailable("Database is unavailable")
+
+
+class UnavailableCollection:
+    def __getattr__(self, name: str):
+        return self
+
+    async def __call__(self, *args, **kwargs):
+        raise DatabaseUnavailable("Database is unavailable")
+
+    async def find_one(self, *args, **kwargs):
+        raise DatabaseUnavailable("Database is unavailable")
+
+    async def insert_one(self, *args, **kwargs):
+        raise DatabaseUnavailable("Database is unavailable")
+
+    async def update_one(self, *args, **kwargs):
+        raise DatabaseUnavailable("Database is unavailable")
+
+    async def delete_one(self, *args, **kwargs):
+        raise DatabaseUnavailable("Database is unavailable")
+
+    async def count_documents(self, *args, **kwargs):
+        raise DatabaseUnavailable("Database is unavailable")
+
+    def create_index(self, *args, **kwargs):
+        raise DatabaseUnavailable("Database is unavailable")
+
+    def find(self, *args, **kwargs):
+        return UnavailableCursor()
+
+    def aggregate(self, *args, **kwargs):
+        return UnavailableCursor()
+
+
 class UnavailableDB:
     def __bool__(self) -> bool:
         return False
 
     def __getattr__(self, name: str):
-        raise DatabaseUnavailable("Database is unavailable")
+        return UnavailableCollection()
 
 
 def get_mongo_url() -> str:
@@ -121,6 +164,7 @@ async def get_current_user(request: Request) -> dict:
     if not token:
         raise HTTPException(status_code=401, detail="Not authenticated")
     try:
+        await ensure_db()
         payload = jwt.decode(token, get_jwt_secret(), algorithms=[JWT_ALGORITHM])
         user_id = payload["sub"]
         user = await db.users.find_one({"id": user_id})
@@ -214,6 +258,7 @@ async def database_unavailable_handler(request: Request, exc: DatabaseUnavailabl
 # ---------- Auth Routes ----------
 @api.post("/auth/register")
 async def register(req: RegisterReq, response: Response):
+    await ensure_db()
     email = req.email.lower()
     existing = await db.users.find_one({"email": email})
     if existing:
@@ -235,6 +280,7 @@ async def register(req: RegisterReq, response: Response):
 
 @api.post("/auth/login")
 async def login(req: LoginReq, response: Response):
+    await ensure_db()
     email = req.email.lower()
     user = await db.users.find_one({"email": email})
     if not user or not verify_password(req.password, user["password_hash"]):
