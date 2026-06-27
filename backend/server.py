@@ -193,7 +193,11 @@ async def get_current_user(request: Request) -> dict:
         user.pop("password_hash", None)
         return user
     except DatabaseUnavailable as exc:
-        raise HTTPException(status_code=503, detail=str(exc)) from exc
+        # surface DB unavailable as 503; include detail when DEBUG set for troubleshooting
+        detail_msg = str(exc)
+        if os.environ.get("DEBUG", "0") != "1":
+            detail_msg = "Database unavailable"
+        raise HTTPException(status_code=503, detail=detail_msg) from exc
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Token expired")
     except jwt.InvalidTokenError:
@@ -299,10 +303,16 @@ async def register(req: RegisterReq, response: Response):
         set_auth_cookie(response, token)
         return {"id": user_id, "email": email, "name": req.name, "units": "kg", "created_at": doc["created_at"], "token": token}
     except DatabaseUnavailable as exc:
-        raise HTTPException(status_code=503, detail=str(exc)) from exc
+        detail_msg = str(exc)
+        if os.environ.get("DEBUG", "0") != "1":
+            detail_msg = "Database unavailable"
+        raise HTTPException(status_code=503, detail=detail_msg) from exc
     except Exception as exc:
         logger.exception("Registration failed")
-        raise HTTPException(status_code=500, detail="Registration failed") from exc
+        detail_msg = "Registration failed"
+        if os.environ.get("DEBUG", "0") == "1":
+            detail_msg = f"Registration failed: {exc}"
+        raise HTTPException(status_code=500, detail=detail_msg) from exc
 
 
 @api.post("/auth/login")
@@ -324,10 +334,16 @@ async def login(req: LoginReq, response: Response):
             "token": token,
         }
     except DatabaseUnavailable as exc:
-        raise HTTPException(status_code=503, detail=str(exc)) from exc
+        detail_msg = str(exc)
+        if os.environ.get("DEBUG", "0") != "1":
+            detail_msg = "Database unavailable"
+        raise HTTPException(status_code=503, detail=detail_msg) from exc
     except Exception as exc:
         logger.exception("Login failed")
-        raise HTTPException(status_code=500, detail="Login failed") from exc
+        detail_msg = "Login failed"
+        if os.environ.get("DEBUG", "0") == "1":
+            detail_msg = f"Login failed: {exc}"
+        raise HTTPException(status_code=500, detail=detail_msg) from exc
 
 
 @api.post("/auth/logout")
