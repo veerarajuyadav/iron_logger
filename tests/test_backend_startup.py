@@ -1,7 +1,17 @@
 import importlib
 import sys
+from pathlib import Path
 
 from fastapi.testclient import TestClient
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
+
+
+def test_backend_requirements_include_certifi():
+    requirements_path = Path(__file__).resolve().parents[1] / "backend" / "requirements.txt"
+    requirements = requirements_path.read_text(encoding="utf-8")
+
+    assert "certifi" in requirements
 
 
 def test_server_starts_without_mongo_env(monkeypatch):

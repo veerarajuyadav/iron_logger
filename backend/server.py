@@ -8,9 +8,13 @@ from fastapi import FastAPI, APIRouter, HTTPException, Request, Response, Depend
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo.errors import ServerSelectionTimeoutError
-import certifi
 import os
 import logging
+
+try:
+    import certifi
+except ModuleNotFoundError:  # pragma: no cover - exercised in minimal environments
+    certifi = None
 
 # -------- DB ----------
 
@@ -111,11 +115,14 @@ async def ensure_db():
 
     connection_kwargs = {
         'tls': True,
-        'tlsCAFile': certifi.where(),
         'serverSelectionTimeoutMS': 10000,
         'connectTimeoutMS': 10000,
         'socketTimeoutMS': 20000,
     }
+    if certifi is not None:
+        connection_kwargs['tlsCAFile'] = certifi.where()
+    else:
+        logger.warning('certifi is not installed; using Python default CA bundle for MongoDB TLS.')
     if _bool_env('MONGO_TLS_ALLOW_INVALID_CERTS'):
         connection_kwargs['tlsAllowInvalidCertificates'] = True
     if _bool_env('MONGO_TLS_ALLOW_INVALID_HOSTNAMES'):

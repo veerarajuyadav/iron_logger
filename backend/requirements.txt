@@ -6,3 +6,4 @@ dnspython
 bcrypt
 PyJWT
 email-validator
+certifi
