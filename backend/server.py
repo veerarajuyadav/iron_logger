@@ -309,6 +309,7 @@ class Exercise(BaseModel):
     id: Optional[str] = None
     name: str
     muscle_group: str  # chest, back, legs, shoulders, arms, core, cardio, other
+    workout_name: Optional[str] = None
 
 
 class WorkoutSet(BaseModel):
@@ -459,6 +460,7 @@ async def create_exercise(body: Exercise, user: dict = Depends(get_current_user)
         "user_id": user["id"],
         "name": body.name,
         "muscle_group": body.muscle_group,
+        "workout_name": body.workout_name,
         "created_at": datetime.now(timezone.utc).isoformat(),
     }
     await db.exercises.insert_one(doc)
