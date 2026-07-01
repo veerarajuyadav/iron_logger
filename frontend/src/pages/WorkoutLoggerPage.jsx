@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import api from "../lib/api";
 import { useAuth } from "../lib/AuthContext";
-import { Plus, Trash2, Save, CheckCircle2 } from "lucide-react";
+import { Plus, Trash2, Save, CheckCircle2, Copy } from "lucide-react";
 
 const MUSCLE_GROUPS = ["chest", "back", "legs", "shoulders", "arms", "core", "cardio", "other"];
 
@@ -23,6 +23,8 @@ export default function WorkoutLoggerPage() {
   const [notes, setNotes] = useState("");
   const [exercises, setExercises] = useState([]); // array of WorkoutExercise
   const [library, setLibrary] = useState([]);
+  const [pastWorkouts, setPastWorkouts] = useState([]);
+  const [showWorkoutPicker, setShowWorkoutPicker] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [newExName, setNewExName] = useState("");
@@ -44,6 +46,7 @@ export default function WorkoutLoggerPage() {
       if (!title) {
         setTitle(`Workout · ${new Date(date).toLocaleDateString(undefined, { weekday: "short" })}`);
       }
+      api.get("/workouts", { params: { limit: 20 } }).then((r) => setPastWorkouts(r.data));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
