@@ -32,8 +32,8 @@ export default function AppShell({ children }) {
       {/* Sidebar */}
       <aside className="hidden md:flex flex-col w-64 bg-brand-panel border-r-2 border-brand-line p-4 sticky top-0 h-screen">
         <div className="mb-8">
-          <div className="font-display text-4xl text-brand-yellow leading-none">GAINS</div>
-          <div className="font-display text-2xl text-white leading-none">TRACKER</div>
+          <div className="font-display text-4xl text-brand-yellow leading-none">IRON</div>
+          <div className="font-display text-2xl text-white leading-none">LOGGER</div>
           <div className="mt-1 inline-block tag-comic bg-brand-pink text-white">v1.0</div>
         </div>
         <nav className="flex-1 flex flex-col gap-1">
@@ -78,7 +78,7 @@ export default function AppShell({ children }) {
 
       {/* Mobile top nav */}
       <div className="md:hidden fixed top-0 inset-x-0 z-30 bg-brand-panel border-b-2 border-brand-line p-3 flex items-center justify-between">
-        <div className="font-display text-2xl text-brand-yellow">GAINS TRACKER</div>
+        <div className="font-display text-2xl text-brand-yellow">IRON LOGGER</div>
         <button
           data-testid="mobile-logout-btn"
           onClick={async () => {
