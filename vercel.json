@@ -4,29 +4,25 @@
     {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
+      "config": { "distDir": "dist" }
     },
     {
       "src": "backend/server.py",
       "use": "@vercel/python",
-      "config": {
-        "runtime": "python3.11"
-      }
+      "config": { "runtime": "python3.11" }
     }
   ],
   "routes": [
     {
       "src": "/_/backend/(.*)",
-      "dest": "backend/server.py"
+      "dest": "backend/server.py?match=$1"
     },
     {
       "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "frontend/index.html"
     }
   ]
 }
