@@ -1,0 +1,2888 @@
+[
+  {
+    "name": "Bench Press",
+    "type": "Gym",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Incline Dumbbell Press",
+    "type": "Gym",
+    "primary_muscle": "Upper Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Chest Fly",
+    "type": "Gym",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Core",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Decline Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Upper Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Dips",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Barbell Deadlift",
+    "type": "Gym",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Hamstrings",
+      "Glutes",
+      "Trapezius",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Barbell Row",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Rear Deltoids",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Lat Pulldown",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Core",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Chin-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Lats",
+      "Core"
+    ]
+  },
+  {
+    "name": "Australian Pull-Up (Inverted Row)",
+    "type": "Calisthenics",
+    "primary_muscle": "Rhomboids",
+    "secondary_muscles": [
+      "Lats",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Muscle-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Chest",
+      "Triceps",
+      "Biceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Barbell Overhead Press",
+    "type": "Gym",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Lateral Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Dumbbell Lateral Raise",
+    "type": "Gym",
+    "primary_muscle": "Lateral Deltoids",
+    "secondary_muscles": [
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Face Pull",
+    "type": "Gym",
+    "primary_muscle": "Rear Deltoids",
+    "secondary_muscles": [
+      "Rotator Cuff",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Pike Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Handstand Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Core",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Barbell Squat",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings",
+      "Lower Back"
+    ]
+  },
+  {
+    "name": "Romanian Deadlift",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Glutes",
+      "Lower Back"
+    ]
+  },
+  {
+    "name": "Leg Press",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Standing Calf Raise",
+    "type": "Gym",
+    "primary_muscle": "Calves",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Bodyweight Squat",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Pistol Squat",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings",
+      "Core"
+    ]
+  },
+  {
+    "name": "Walking Lunge",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Glute Bridge",
+    "type": "Calisthenics",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": [
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Barbell Bicep Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Hammer Curl",
+    "type": "Gym",
+    "primary_muscle": "Brachialis",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Tricep Rope Pushdown",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Skull Crusher",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Diamond Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": [
+      "Chest",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Bench Dips",
+    "type": "Calisthenics",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": [
+      "Chest",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Hanging Leg Raise",
+    "type": "Calisthenics",
+    "primary_muscle": "Abs",
+    "secondary_muscles": [
+      "Hip Flexors",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Crunch",
+    "type": "Calisthenics",
+    "primary_muscle": "Abs",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Plank",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Shoulders",
+      "Glutes"
+    ]
+  },
+  {
+    "name": "Russian Twist",
+    "type": "Calisthenics",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": [
+      "Abs"
+    ]
+  },
+  {
+    "name": "L-Sit",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Triceps",
+      "Hip Flexors",
+      "Quadriceps"
+    ]
+  },
+  {
+    "name": "Cable Woodchopper",
+    "type": "Gym",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": [
+      "Abs",
+      "Shoulders"
+    ]
+  },
+  {
+    "name": "Barbell Shrug",
+    "type": "Gym",
+    "primary_muscle": "Trapezius",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Farmer's Walk",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": [
+      "Trapezius",
+      "Core",
+      "Calves"
+    ]
+  },
+  {
+    "name": "Wrist Curl",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Front Lever",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Core",
+      "Shoulders",
+      "Chest"
+    ]
+  },
+  {
+    "name": "Planche",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Chest",
+      "Core",
+      "Triceps",
+      "Lower Back"
+    ]
+  },
+  {
+    "name": "Dragon Flag",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Lats",
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Toes to Bar",
+    "type": "Calisthenics",
+    "primary_muscle": "Abs",
+    "secondary_muscles": [
+      "Forearms",
+      "Hip Flexors",
+      "Lats"
+    ]
+  },
+  {
+    "name": "Bulgarian Split Squat",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Leg Curl",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Hip Thrust",
+    "type": "Gym",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": [
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Ab Wheel Rollout",
+    "type": "Gym",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Lats",
+      "Shoulders"
+    ]
+  },
+  {
+    "name": "Superman",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Glutes"
+    ]
+  },
+  {
+    "name": "Decline Barbell Bench Press",
+    "type": "Gym",
+    "primary_muscle": "Lower Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Cable Crossover",
+    "type": "Gym",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Dumbbell Pullover",
+    "type": "Gym",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Lats",
+      "Triceps",
+      "Serratus Anterior"
+    ]
+  },
+  {
+    "name": "Archer Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Pseudo-Plancke Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Chest",
+      "Triceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Ring Fly",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Anterior Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "T-Bar Row",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Trapezius",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Seated Cable Row",
+    "type": "Gym",
+    "primary_muscle": "Rhomboids",
+    "secondary_muscles": [
+      "Lats",
+      "Trapezius",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Dumbbell Row",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Biceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Close-Grip Lat Pulldown",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms",
+      "Chest"
+    ]
+  },
+  {
+    "name": "Hyperextension",
+    "type": "Gym",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Scapular Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Trapezius",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "L-Sit Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Abs",
+      "Biceps",
+      "Hip Flexors"
+    ]
+  },
+  {
+    "name": "One-Arm Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms",
+      "Core"
+    ]
+  },
+  {
+    "name": "Dumbbell Shoulder Press",
+    "type": "Gym",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Lateral Deltoids"
+    ]
+  },
+  {
+    "name": "Arnold Press",
+    "type": "Gym",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Lateral Deltoids",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Dumbbell Rear Delt Fly",
+    "type": "Gym",
+    "primary_muscle": "Rear Deltoids",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Cable Lateral Raise",
+    "type": "Gym",
+    "primary_muscle": "Lateral Deltoids",
+    "secondary_muscles": [
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Wall Walk",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Core",
+      "Triceps",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Korean Dip",
+    "type": "Calisthenics",
+    "primary_muscle": "Rear Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Lower Back",
+      "Lower Chest"
+    ]
+  },
+  {
+    "name": "Front Squat",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Core",
+      "Upper Back",
+      "Glutes"
+    ]
+  },
+  {
+    "name": "Hack Squat",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Leg Extension",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Seated Calf Raise",
+    "type": "Gym",
+    "primary_muscle": "Calves",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Deficit Sumo Deadlift",
+    "type": "Gym",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": [
+      "Hamstrings",
+      "Quadriceps",
+      "Inner Thighs"
+    ]
+  },
+  {
+    "name": "Nordic Hamstring Curl",
+    "type": "Calisthenics",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Calves",
+      "Glutes"
+    ]
+  },
+  {
+    "name": "Shrimp Squat",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings",
+      "Core"
+    ]
+  },
+  {
+    "name": "Single-Leg Calf Raise",
+    "type": "Calisthenics",
+    "primary_muscle": "Calves",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Incline Dumbbell Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Preacher Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Cable Bicep Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Overhead Cable Tricep Extension",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Close-Grip Bench Press",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": [
+      "Chest",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Reverse-Grip Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": [
+      "Lower Chest",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Ring Dip",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Bicycle Crunch",
+    "type": "Calisthenics",
+    "primary_muscle": "Abs",
+    "secondary_muscles": [
+      "Obliques",
+      "Hip Flexors"
+    ]
+  },
+  {
+    "name": "V-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Abs",
+    "secondary_muscles": [
+      "Hip Flexors"
+    ]
+  },
+  {
+    "name": "Side Plank",
+    "type": "Calisthenics",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": [
+      "Core",
+      "Shoulders"
+    ]
+  },
+  {
+    "name": "Flutter Kicks",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Abs",
+    "secondary_muscles": [
+      "Hip Flexors"
+    ]
+  },
+  {
+    "name": "Windshield Wipers",
+    "type": "Calisthenics",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": [
+      "Abs",
+      "Core",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Hollow Body Hold",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Abs",
+      "Quadriceps"
+    ]
+  },
+  {
+    "name": "Cable Crunch",
+    "type": "Gym",
+    "primary_muscle": "Abs",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Dumbbell Side Bend",
+    "type": "Gym",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": [
+      "Abs"
+    ]
+  },
+  {
+    "name": "Dumbbell Shrug",
+    "type": "Gym",
+    "primary_muscle": "Trapezius",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Plate Pinch Hold",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Reverse Barbell Curl",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": [
+      "Brachialis",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Iron Cross",
+    "type": "Calisthenics",
+    "primary_muscle": "Shoulders",
+    "secondary_muscles": [
+      "Chest",
+      "Lats",
+      "Core"
+    ]
+  },
+  {
+    "name": "Victorian Cross",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rear Deltoids",
+      "Core",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Hevco Deadlift",
+    "type": "Gym",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Trapezius",
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Kettlebell Swing",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Glutes",
+      "Lower Back",
+      "Core",
+      "Shoulders"
+    ]
+  },
+  {
+    "name": "Machine Chest Press",
+    "type": "Gym",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Hammer Strength Wide Chest Press",
+    "type": "Gym",
+    "primary_muscle": "Lower Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Svend Press",
+    "type": "Gym",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Deficit Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Clapping Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Single-Arm Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Core",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Meadows Row",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Rear Deltoids",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Chest-Supported Dumbbell Row",
+    "type": "Gym",
+    "primary_muscle": "Rhomboids",
+    "secondary_muscles": [
+      "Lats",
+      "Trapezius",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Straight-Arm Cable Pull-Down",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Triceps",
+      "Rear Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Rack Pull",
+    "type": "Gym",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Trapezius",
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Good Morning",
+    "type": "Gym",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Hamstrings",
+      "Glutes"
+    ]
+  },
+  {
+    "name": "Commando Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Brachialis",
+      "Core"
+    ]
+  },
+  {
+    "name": "Behind-the-Neck Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Tuck Front Lever Row",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Biceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Smith Machine Overhead Press",
+    "type": "Gym",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Lateral Deltoids"
+    ]
+  },
+  {
+    "name": "Upright Row",
+    "type": "Gym",
+    "primary_muscle": "Lateral Deltoids",
+    "secondary_muscles": [
+      "Trapezius",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Single-Arm Cable Rear Delt Fly",
+    "type": "Gym",
+    "primary_muscle": "Rear Deltoids",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Lu Raise",
+    "type": "Gym",
+    "primary_muscle": "Lateral Deltoids",
+    "secondary_muscles": [
+      "Trapezius",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Human Flag",
+    "type": "Calisthenics",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": [
+      "Lats",
+      "Shoulders",
+      "Core"
+    ]
+  },
+  {
+    "name": "Hefesto",
+    "type": "Calisthenics",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Rear Deltoids",
+      "Triceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Zercher Squat",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Core",
+      "Glutes",
+      "Forearms",
+      "Upper Back"
+    ]
+  },
+  {
+    "name": "Goblet Squat",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings",
+      "Core"
+    ]
+  },
+  {
+    "name": "Sissy Squat",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Core"
+    ]
+  },
+  {
+    "name": "Seated Leg Curl",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Calves"
+    ]
+  },
+  {
+    "name": "Sumo Deadlift",
+    "type": "Gym",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": [
+      "Quadriceps",
+      "Hamstrings",
+      "Inner Thighs"
+    ]
+  },
+  {
+    "name": "Donkey Kickback",
+    "type": "Calisthenics",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": [
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Box Squat",
+    "type": "Gym",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": [
+      "Hamstrings",
+      "Quadriceps"
+    ]
+  },
+  {
+    "name": "Tibialis Raise",
+    "type": "Calisthenics",
+    "primary_muscle": "Tibialis Anterior",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Concentration Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Spider Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Zottman Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms",
+      "Brachialis"
+    ]
+  },
+  {
+    "name": "Overhead Dumbbell Tricep Extension",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Dumbbell Kickback",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Tiger Bend Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": [
+      "Anterior Deltoids",
+      "Chest",
+      "Core"
+    ]
+  },
+  {
+    "name": "Impossible Dip",
+    "type": "Calisthenics",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": [
+      "Shoulders",
+      "Chest",
+      "Core"
+    ]
+  },
+  {
+    "name": "Captain's Chair Leg Raise",
+    "type": "Gym",
+    "primary_muscle": "Abs",
+    "secondary_muscles": [
+      "Hip Flexors"
+    ]
+  },
+  {
+    "name": "Pallof Press",
+    "type": "Gym",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Obliques",
+      "Shoulders"
+    ]
+  },
+  {
+    "name": "Decline Crunch",
+    "type": "Gym",
+    "primary_muscle": "Abs",
+    "secondary_muscles": [
+      "Hip Flexors"
+    ]
+  },
+  {
+    "name": "Dead Bug",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Abs"
+    ]
+  },
+  {
+    "name": "Bird Dog",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Glutes",
+      "Core"
+    ]
+  },
+  {
+    "name": "V-Bar Pulldown",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Rhomboids"
+    ]
+  },
+  {
+    "name": "Cable Kickback",
+    "type": "Gym",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": [
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Behind-the-Neck Barbell Shrug",
+    "type": "Gym",
+    "primary_muscle": "Trapezius",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Barbell Wrist Curl",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Barbell Reverse Wrist Curl",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Tuck Planche Hold",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Chest",
+      "Core",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Straddle Planche Hold",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Chest",
+      "Core",
+      "Triceps",
+      "Lower Back"
+    ]
+  },
+  {
+    "name": "Tuck Front Lever Hold",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Core",
+      "Shoulders",
+      "Chest"
+    ]
+  },
+  {
+    "name": "Single-Leg Front Lever Hold",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Core",
+      "Shoulders",
+      "Chest",
+      "Glutes"
+    ]
+  },
+  {
+    "name": "Lying Leg Raise",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Abs",
+    "secondary_muscles": [
+      "Hip Flexors"
+    ]
+  },
+  {
+    "name": "Hammer Strength Incline Press",
+    "type": "Gym",
+    "primary_muscle": "Upper Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Pec Deck Fly",
+    "type": "Gym",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Floor Press",
+    "type": "Gym",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Wide-Grip Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Anterior Deltoids",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Negative Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Knee Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Single-Arm Lat Pulldown",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms",
+      "Core"
+    ]
+  },
+  {
+    "name": "Reverse-Grip Lat Pulldown",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Machine Low Row",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Rack Pull Below Knee",
+    "type": "Gym",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Wide-Grip Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Biceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Negative Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Scapular Dip",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Lower Chest",
+    "secondary_muscles": [
+      "Trapezius",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Behind-the-Neck Barbell Press",
+    "type": "Gym",
+    "primary_muscle": "Lateral Deltoids",
+    "secondary_muscles": [
+      "Anterior Deltoids",
+      "Trapezius",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Dumbbell Front Raise",
+    "type": "Gym",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Lateral Deltoids"
+    ]
+  },
+  {
+    "name": "Cable Rear Delt Row",
+    "type": "Gym",
+    "primary_muscle": "Rear Deltoids",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Trapezius",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Incline Dumbbell Rear Delt Fly",
+    "type": "Gym",
+    "primary_muscle": "Rear Deltoids",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Dolphin Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Core",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Bear Crawl",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Shoulders",
+      "Quadriceps"
+    ]
+  },
+  {
+    "name": "Smith Machine Squat",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Deficit Barbell Deadlift",
+    "type": "Gym",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Hamstrings",
+      "Glutes",
+      "Quadriceps"
+    ]
+  },
+  {
+    "name": "Machine Inner Thigh Adduction",
+    "type": "Gym",
+    "primary_muscle": "Inner Thighs",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Machine Outer Thigh Abduction",
+    "type": "Gym",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Smith Machine Calf Raise",
+    "type": "Gym",
+    "primary_muscle": "Calves",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Reverse Lunge",
+    "type": "Calisthenics",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": [
+      "Quadriceps",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Side Lunge",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Inner Thighs"
+    ]
+  },
+  {
+    "name": "Step-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Donkey Calf Raise",
+    "type": "Calisthenics",
+    "primary_muscle": "Calves",
+    "secondary_muscles": [
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Dumbbell Bicep Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Cable Hammer Curl",
+    "type": "Gym",
+    "primary_muscle": "Brachialis",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Concentration Hammer Curl",
+    "type": "Gym",
+    "primary_muscle": "Brachialis",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Single-Arm Cable Tricep Extension",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Barbell Overhead Tricep Extension",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Cross-Body Cable Tricep Extension",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Heavco Dip",
+    "type": "Gym",
+    "primary_muscle": "Lower Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Toe Touch",
+    "type": "Calisthenics",
+    "primary_muscle": "Abs",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Reverse Crunch",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Abs",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Oblique Crunch",
+    "type": "Calisthenics",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Mountain Climber",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Shoulders",
+      "Abs"
+    ]
+  },
+  {
+    "name": "Plank Shoulder Tap",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Shoulders",
+      "Abs"
+    ]
+  },
+  {
+    "name": "Bird Dog Plank",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Lower Back",
+      "Glutes",
+      "Shoulders"
+    ]
+  },
+  {
+    "name": "Cable Torso Rotation",
+    "type": "Gym",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": [
+      "Abs"
+    ]
+  },
+  {
+    "name": "Machine Crunch",
+    "type": "Gym",
+    "primary_muscle": "Abs",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Smith Machine Shrug",
+    "type": "Gym",
+    "primary_muscle": "Trapezius",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Dumbbell Wrist Curl",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Dumbbell Reverse Wrist Curl",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Straddle Front Lever Hold",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Core",
+      "Shoulders",
+      "Chest",
+      "Glutes"
+    ]
+  },
+  {
+    "name": "Advanced Tuck Front Lever Hold",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Core",
+      "Shoulders",
+      "Chest"
+    ]
+  },
+  {
+    "name": "Advanced Tuck Planche Hold",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Chest",
+      "Core",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Single-Leg Squat (To Box)",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Kettlebell Press",
+    "type": "Gym",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Kettlebell Snatch",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Shoulders",
+      "Trapezius",
+      "Glutes",
+      "Core"
+    ]
+  },
+  {
+    "name": "Kettlebell Clean",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Glutes",
+      "Forearms",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Barbell Clean and Jerk",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Shoulders",
+      "Hamstrings",
+      "Glutes",
+      "Trapezius",
+      "Core"
+    ]
+  },
+  {
+    "name": "Barbell Snatch",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Shoulders",
+      "Glutes",
+      "Trapezius",
+      "Core",
+      "Back"
+    ]
+  },
+  {
+    "name": "Barbell High Pull",
+    "type": "Gym",
+    "primary_muscle": "Trapezius",
+    "secondary_muscles": [
+      "Lateral Deltoids",
+      "Hamstrings",
+      "Glutes"
+    ]
+  },
+  {
+    "name": "Landmine Press",
+    "type": "Gym",
+    "primary_muscle": "Upper Chest",
+    "secondary_muscles": [
+      "Anterior Deltoids",
+      "Triceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Landmine Row",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Cable Pull-Through",
+    "type": "Gym",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": [
+      "Hamstrings",
+      "Lower Back"
+    ]
+  },
+  {
+    "name": "Jefferson Squat",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings",
+      "Inner Thighs"
+    ]
+  },
+  {
+    "name": "Hack Squat Machine Calf Raise",
+    "type": "Gym",
+    "primary_muscle": "Calves",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Incline Cable Fly",
+    "type": "Gym",
+    "primary_muscle": "Upper Chest",
+    "secondary_muscles": [
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Decline Cable Fly",
+    "type": "Gym",
+    "primary_muscle": "Lower Chest",
+    "secondary_muscles": [
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Spider Crawl",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Shoulders",
+      "Chest"
+    ]
+  },
+  {
+    "name": "Incline Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Hindoo Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Shoulders",
+    "secondary_muscles": [
+      "Chest",
+      "Triceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Typewriter Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Wall Sit",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes"
+    ]
+  },
+  {
+    "name": "Single-Leg Glute Bridge",
+    "type": "Calisthenics",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": [
+      "Hamstrings",
+      "Core"
+    ]
+  },
+  {
+    "name": "Jumping Squat",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings",
+      "Calves"
+    ]
+  },
+  {
+    "name": "Jumping Lunge",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings",
+      "Calves"
+    ]
+  },
+  {
+    "name": "Cosack Squat",
+    "type": "Calisthenics",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Inner Thighs",
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Single-Leg Romanian Deadlift",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Glutes",
+      "Core"
+    ]
+  },
+  {
+    "name": "Z-Press",
+    "type": "Gym",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Core",
+      "Upper Back"
+    ]
+  },
+  {
+    "name": "Bradford Press",
+    "type": "Gym",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Lateral Deltoids",
+      "Triceps",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Dumbbell Shrug With Rotation",
+    "type": "Gym",
+    "primary_muscle": "Trapezius",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Behind-The-Back Barbell Wrist Curl",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Suitcase Deadlift",
+    "type": "Gym",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Core",
+      "Obliques",
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Single-Arm Dumbbell Bench Press",
+    "type": "Gym",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Core",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Hammer Strength High Row",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Kelso Row",
+    "type": "Gym",
+    "primary_muscle": "Rhomboids",
+    "secondary_muscles": [
+      "Trapezius",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Cheat Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms",
+      "Lower Back"
+    ]
+  },
+  {
+    "name": "Drag Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Rear Deltoids"
+    ]
+  },
+  {
+    "name": "JM Press",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": [
+      "Chest",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Tate Press",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Lying Cable Bicep Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Plank Jacks",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Abs",
+      "Glutes"
+    ]
+  },
+  {
+    "name": "Body Saw",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Abs",
+      "Shoulders"
+    ]
+  },
+  {
+    "name": "Ab Wheel Rollout (From Knees)",
+    "type": "Gym",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Abs",
+      "Lats"
+    ]
+  },
+  {
+    "name": "Hanging Knee Raise",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Abs",
+    "secondary_muscles": [
+      "Hip Flexors"
+    ]
+  },
+  {
+    "name": "Leg Raise On Parallel Bars",
+    "type": "Calisthenics",
+    "primary_muscle": "Abs",
+    "secondary_muscles": [
+      "Hip Flexors",
+      "Shoulders"
+    ]
+  },
+  {
+    "name": "Knee Raise On Parallel Bars",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Abs",
+    "secondary_muscles": [
+      "Hip Flexors"
+    ]
+  },
+  {
+    "name": "L-Sit On Floor",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Abs",
+      "Hip Flexors",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Tuck L-Sit On Parallel Bars",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Abs",
+      "Hip Flexors"
+    ]
+  },
+  {
+    "name": "Bird Dog Hold",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Glutes",
+      "Core"
+    ]
+  },
+  {
+    "name": "Cat Cow",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Core"
+    ]
+  },
+  {
+    "name": "Seated Dumbbell Lateral Raise",
+    "type": "Gym",
+    "primary_muscle": "Lateral Deltoids",
+    "secondary_muscles": [
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Lean-Away Cable Lateral Raise",
+    "type": "Gym",
+    "primary_muscle": "Lateral Deltoids",
+    "secondary_muscles": [
+      "Trapezius",
+      "Core"
+    ]
+  },
+  {
+    "name": "Single-Arm Kettlebell Row",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Burpee",
+    "type": "Calisthenics",
+    "primary_muscle": "Cardio / Full Body",
+    "secondary_muscles": [
+      "Quadriceps",
+      "Chest",
+      "Triceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Spiderman Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Obliques",
+      "Triceps",
+      "Anterior Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Deficit Ring Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Single-Arm Dumbbell Fly",
+    "type": "Gym",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Anterior Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Machine Incline Chest Press",
+    "type": "Gym",
+    "primary_muscle": "Upper Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Machine Decline Chest Press",
+    "type": "Gym",
+    "primary_muscle": "Lower Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Incline Cable Crossover",
+    "type": "Gym",
+    "primary_muscle": "Upper Chest",
+    "secondary_muscles": [
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Helicopter Push-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Shoulders",
+      "Triceps",
+      "Obliques"
+    ]
+  },
+  {
+    "name": "Kettlebell Renegade Row",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Core",
+      "Triceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Seal Row",
+    "type": "Gym",
+    "primary_muscle": "Rhomboids",
+    "secondary_muscles": [
+      "Lats",
+      "Rear Deltoids",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Single-Arm Dumbbell Row On Bench",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Behind-The-Neck Lat Pulldown",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Towel Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": [
+      "Lats",
+      "Biceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Neutral Grip Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Brachialis",
+      "Biceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Mixed Grip Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms",
+      "Core"
+    ]
+  },
+  {
+    "name": "Horizontal Shrug",
+    "type": "Gym",
+    "primary_muscle": "Rhomboids",
+    "secondary_muscles": [
+      "Trapezius",
+      "Rear Deltoids"
+    ]
+  },
+  {
+    "name": "Incline Dumbbell Overhead Press",
+    "type": "Gym",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Upper Chest"
+    ]
+  },
+  {
+    "name": "Single-Arm Landmine Shoulder Press",
+    "type": "Gym",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Kettlebell Halo",
+    "type": "Gym",
+    "primary_muscle": "Shoulders",
+    "secondary_muscles": [
+      "Trapezius",
+      "Core"
+    ]
+  },
+  {
+    "name": "Dumbbell Crucifix Hold",
+    "type": "Gym",
+    "primary_muscle": "Lateral Deltoids",
+    "secondary_muscles": [
+      "Forearms",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Rear Delt Cable Crossover",
+    "type": "Gym",
+    "primary_muscle": "Rear Deltoids",
+    "secondary_muscles": [
+      "Rhomboids",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Prone Dumbbell Rear Delt Raise",
+    "type": "Gym",
+    "primary_muscle": "Rear Deltoids",
+    "secondary_muscles": [
+      "Rhomboids"
+    ]
+  },
+  {
+    "name": "Handstand Hold Against Wall",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Core",
+      "Trapezius"
+    ]
+  },
+  {
+    "name": "Barbell Thruster",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Anterior Deltoids",
+      "Glutes",
+      "Triceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Dumbbell Bulgarian Split Squat",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Kettlebell Goblet Lunge",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings",
+      "Core"
+    ]
+  },
+  {
+    "name": "Barbell Hack Squat",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Single-Leg Leg Press",
+    "type": "Gym",
+    "primary_muscle": "Quadriceps",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Deficit Romanian Deadlift",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Glutes",
+      "Lower Back"
+    ]
+  },
+  {
+    "name": "Kettlebell Romanian Deadlift",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Glutes",
+      "Lower Back"
+    ]
+  },
+  {
+    "name": "Frog Pump",
+    "type": "Calisthenics",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Curtsy Lunge",
+    "type": "Calisthenics",
+    "primary_muscle": "Glutes",
+    "secondary_muscles": [
+      "Quadriceps",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Single-Leg Calf Raise On Block",
+    "type": "Calisthenics",
+    "primary_muscle": "Calves",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Cable Wrist Curl",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Cable Reverse Wrist Curl",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Plate Wrist Curls",
+    "type": "Gym",
+    "primary_muscle": "Forearms",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Dumbbell Preacher Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Cross-Body Hammer Curl",
+    "type": "Gym",
+    "primary_muscle": "Brachialis",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Waiter's Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Single-Arm Cable Bicep Curl",
+    "type": "Gym",
+    "primary_muscle": "Biceps",
+    "secondary_muscles": [
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Incline Dumbbell Hammer Curl",
+    "type": "Gym",
+    "primary_muscle": "Brachialis",
+    "secondary_muscles": [
+      "Biceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Single-Arm Cable Tricep Pushdown",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Dumbbell Floor Tricep Extension",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Barbell JM Press",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": [
+      "Chest",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Kettlebell Overhead Tricep Extension",
+    "type": "Gym",
+    "primary_muscle": "Triceps",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Plank Shoulder Tap with Knee Tap",
+    "type": "Calisthenics",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Shoulders",
+      "Abs"
+    ]
+  },
+  {
+    "name": "Spiderman Plank",
+    "type": "Calisthenics",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": [
+      "Abs",
+      "Core"
+    ]
+  },
+  {
+    "name": "Side Plank Hip Dip",
+    "type": "Calisthenics",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": [
+      "Core"
+    ]
+  },
+  {
+    "name": "Dumbbell Russian Twist",
+    "type": "Gym",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": [
+      "Abs"
+    ]
+  },
+  {
+    "name": "Medicine Ball Slam",
+    "type": "Gym",
+    "primary_muscle": "Core",
+    "secondary_muscles": [
+      "Lats",
+      "Shoulders",
+      "Abs"
+    ]
+  },
+  {
+    "name": "Garhammer Raise",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Abs",
+    "secondary_muscles": []
+  },
+  {
+    "name": "Reverse Hyperextension",
+    "type": "Gym",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Glutes",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Seated Barbell Good Morning",
+    "type": "Gym",
+    "primary_muscle": "Lower Back",
+    "secondary_muscles": [
+      "Hamstrings",
+      "Glutes"
+    ]
+  },
+  {
+    "name": "High Knee Run",
+    "type": "Calisthenics",
+    "primary_muscle": "Cardio / Full Body",
+    "secondary_muscles": [
+      "Hip Flexors",
+      "Calves",
+      "Quadriceps"
+    ]
+  },
+  {
+    "name": "Jumping Jack",
+    "type": "Calisthenics",
+    "primary_muscle": "Cardio / Full Body",
+    "secondary_muscles": [
+      "Calves",
+      "Shoulders"
+    ]
+  },
+  {
+    "name": "Skater Jump",
+    "type": "Calisthenics",
+    "primary_muscle": "Cardio / Full Body",
+    "secondary_muscles": [
+      "Glutes",
+      "Quadriceps",
+      "Calves"
+    ]
+  },
+  {
+    "name": "Tuck Jump",
+    "type": "Calisthenics",
+    "primary_muscle": "Cardio / Full Body",
+    "secondary_muscles": [
+      "Quadriceps",
+      "Calves",
+      "Abs"
+    ]
+  },
+  {
+    "name": "Shadow Boxing",
+    "type": "Calisthenics",
+    "primary_muscle": "Cardio / Full Body",
+    "secondary_muscles": [
+      "Shoulders",
+      "Core"
+    ]
+  },
+  {
+    "name": "Kettlebell Windmill",
+    "type": "Gym",
+    "primary_muscle": "Obliques",
+    "secondary_muscles": [
+      "Shoulders",
+      "Core",
+      "Hamstrings"
+    ]
+  },
+  {
+    "name": "Turkish Get-Up",
+    "type": "Gym",
+    "primary_muscle": "Cardio / Full Body",
+    "secondary_muscles": [
+      "Shoulders",
+      "Core",
+      "Glutes",
+      "Quadriceps"
+    ]
+  },
+  {
+    "name": "Single-Arm Kettlebell Snatch",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Shoulders",
+      "Glutes",
+      "Trapezius",
+      "Core"
+    ]
+  },
+  {
+    "name": "Dumbbell Clean and Press",
+    "type": "Gym",
+    "primary_muscle": "Cardio / Full Body",
+    "secondary_muscles": [
+      "Shoulders",
+      "Hamstrings",
+      "Glutes",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Single-Arm Dumbbell Snatch",
+    "type": "Gym",
+    "primary_muscle": "Hamstrings",
+    "secondary_muscles": [
+      "Shoulders",
+      "Glutes",
+      "Core"
+    ]
+  },
+  {
+    "name": "Planche Lean",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Core",
+      "Triceps",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Front Lever Pull",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Core",
+      "Shoulders",
+      "Rear Deltoids"
+    ]
+  },
+  {
+    "name": "Back Lever Hold",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Chest",
+      "Core",
+      "Lower Back",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Tuck Back Lever Hold",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Chest",
+      "Core"
+    ]
+  },
+  {
+    "name": "Ring Face Pull",
+    "type": "Calisthenics",
+    "primary_muscle": "Rear Deltoids",
+    "secondary_muscles": [
+      "Trapezius",
+      "Rhomboids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Ring Inverted Row",
+    "type": "Calisthenics",
+    "primary_muscle": "Rhomboids",
+    "secondary_muscles": [
+      "Lats",
+      "Biceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Ring Archer Pull-Up",
+    "type": "Calisthenics",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Core",
+      "Shoulders"
+    ]
+  },
+  {
+    "name": "Single-Arm Ring Row",
+    "type": "Calisthenics",
+    "primary_muscle": "Rhomboids",
+    "secondary_muscles": [
+      "Lats",
+      "Biceps",
+      "Core"
+    ]
+  },
+  {
+    "name": "Parallette Straight Bar Dip",
+    "type": "Calisthenics",
+    "primary_muscle": "Lower Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Weighted Pull-Up",
+    "type": "Gym",
+    "primary_muscle": "Lats",
+    "secondary_muscles": [
+      "Biceps",
+      "Core",
+      "Forearms"
+    ]
+  },
+  {
+    "name": "Weighted Dip",
+    "type": "Gym",
+    "primary_muscle": "Lower Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids"
+    ]
+  },
+  {
+    "name": "Weighted Push-Up",
+    "type": "Gym",
+    "primary_muscle": "Chest",
+    "secondary_muscles": [
+      "Triceps",
+      "Anterior Deltoids",
+      "Core"
+    ]
+  },
+  {
+    "name": "Wall Handstand Push-Up (Deficit)",
+    "type": "Calisthenics",
+    "primary_muscle": "Anterior Deltoids",
+    "secondary_muscles": [
+      "Triceps",
+      "Trapezius",
+      "Core"
+    ]
+  }
+]
