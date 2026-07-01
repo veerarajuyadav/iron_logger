@@ -28,6 +28,7 @@
   "scripts": {
     "start": "craco start",
     "dev": "craco start",
+    "prebuild": "node scripts/generate-icons.js",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
