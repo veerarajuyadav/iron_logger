@@ -1,4 +1,4 @@
-import exercises from "./workouts.JSON";
+import exercises from "./workouts.json";
 
 const PRIMARY_MUSCLE_TO_GROUP = {
   abs: "core",
