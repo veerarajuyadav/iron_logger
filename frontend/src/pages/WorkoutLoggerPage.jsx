@@ -62,7 +62,6 @@ export default function WorkoutLoggerPage() {
     const timer = setTimeout(() => {
       const results = searchLocal({ query, group: newExGroup });
       setSearchResults(results);
-      setShowDropdown(true);
     }, 150);
 
     return () => clearTimeout(timer);
@@ -347,12 +346,13 @@ export default function WorkoutLoggerPage() {
                     <input
                       ref={inputRef}
                       data-testid="new-exercise-name"
-                      className="input-comic pl-9 w-full"
+                      className="input-comic pl-9 w-full min-h-[48px]"
                       placeholder="Search exercises..."
                       value={searchQuery}
                       onChange={(e) => {
                         setSearchQuery(e.target.value);
                         setNewExName(e.target.value);
+                        setShowDropdown(true);
                       }}
                       onFocus={handleExFocus}
                     />
@@ -366,7 +366,7 @@ export default function WorkoutLoggerPage() {
                         <button
                           key={`${ex.name}-${i}`}
                           type="button"
-                          className="w-full text-left px-3 py-2 text-sm rounded hover:bg-brand-ink/5 transition-colors"
+                          className="w-full text-left px-3 py-3 sm:py-2 text-sm rounded hover:bg-brand-ink/5 transition-colors"
                           onClick={() => selectExercise(ex)}
                           data-testid={`search-result-${i}`}
                         >

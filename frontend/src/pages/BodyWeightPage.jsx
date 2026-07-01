@@ -53,8 +53,8 @@ export default function BodyWeightPage() {
           <label className="block text-xs font-bold uppercase tracking-widest mb-1">Weight ({units})</label>
           <input
             data-testid="bw-weight"
-            type="number"
-            step="0.1"
+            type="text"
+            inputMode="decimal"
             className="input-comic"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
