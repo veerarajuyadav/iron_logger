@@ -202,6 +202,18 @@ from datetime import datetime, timezone, timedelta, date
 app = FastAPI()
 api = APIRouter(prefix="/api")
 
+
+@app.middleware("http")
+async def normalize_path(request: Request, call_next):
+    path = request.url.path
+    if path.startswith("/_/backend"):
+        path = path[len("/_/backend"):]
+    if not path.startswith("/"):
+        path = "/" + path
+    if path != request.url.path:
+        request.scope["path"] = path
+    return await call_next(request)
+
 JWT_ALGORITHM = "HS256"
 
 
