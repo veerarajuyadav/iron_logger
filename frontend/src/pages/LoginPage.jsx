@@ -34,10 +34,10 @@ export default function LoginPage() {
         <div className="absolute inset-0 flex flex-col justify-between p-10">
           <div>
             <div className="font-display text-7xl text-brand-yellow leading-none drop-shadow-[4px_4px_0px_#000]">
-              IRON
+              GAINS
             </div>
             <div className="font-display text-7xl text-white leading-none drop-shadow-[4px_4px_0px_#000]">
-              LOGGER
+              TRACKER
             </div>
             <div className="mt-4 inline-block bg-brand-cyan text-black font-bold uppercase tracking-widest px-3 py-1 border-2 border-black shadow-comic">
               POW! Track Every Rep.
