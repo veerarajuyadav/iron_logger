@@ -12,14 +12,17 @@
       "config": { "runtime": "python3.11" }
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/_/backend/(.*)",
-      "destination": "/backend/server.py"
+      "src": "/_/backend/(.*)",
+      "dest": "backend/server.py?path=$1"
     },
     {
-      "source": "/(.*)",
-      "destination": "/frontend/$1"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "frontend/$1"
     }
   ]
 }
