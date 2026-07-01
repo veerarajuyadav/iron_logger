@@ -8,10 +8,14 @@ export default function ExercisesPage() {
   const [items, setItems] = useState([]);
   const [name, setName] = useState("");
   const [group, setGroup] = useState("chest");
+  const [workoutName, setWorkoutName] = useState("");
+  const [workouts, setWorkouts] = useState([]);
 
   const load = async () => {
-    const { data } = await api.get("/exercises");
-    setItems(data);
+    const [exRes, woRes] = await Promise.all([api.get("/exercises"), api.get("/workouts")]);
+    setItems(exRes.data);
+    const titles = [...new Set(woRes.data.map((w) => w.title).filter(Boolean))].sort();
+    setWorkouts(titles);
   };
   useEffect(() => {
     load();
@@ -20,8 +24,13 @@ export default function ExercisesPage() {
   const add = async (e) => {
     e.preventDefault();
     if (!name.trim()) return;
-    await api.post("/exercises", { name: name.trim(), muscle_group: group });
+    await api.post("/exercises", {
+      name: name.trim(),
+      muscle_group: group,
+      workout_name: workoutName || null,
+    });
     setName("");
+    setWorkoutName("");
     load();
   };
   const del = async (id) => {
@@ -54,6 +63,17 @@ export default function ExercisesPage() {
             ))}
           </select>
         </div>
+        <div>
+          <label className="block text-xs font-bold uppercase tracking-widest mb-1">Workout</label>
+          <select data-testid="ex-workout-select" className="input-comic" value={workoutName} onChange={(e) => setWorkoutName(e.target.value)}>
+            <option value="">None</option>
+            {workouts.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
+          </select>
+        </div>
         <button className="btn-comic" data-testid="ex-add-btn">
           <Plus size={16} /> Add
         </button>
@@ -69,7 +89,12 @@ export default function ExercisesPage() {
             <div key={ex.id} className="panel p-4 flex items-center justify-between" data-testid={`exercise-card-${ex.id}`}>
               <div>
                 <div className="font-display text-2xl">{ex.name}</div>
-                <span className="tag-comic bg-brand-cyan text-black mt-1">{ex.muscle_group}</span>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  <span className="tag-comic bg-brand-cyan text-black">{ex.muscle_group}</span>
+                  {ex.workout_name && (
+                    <span className="tag-comic bg-brand-yellow text-black">{ex.workout_name}</span>
+                  )}
+                </div>
               </div>
               <button onClick={() => del(ex.id)} className="text-brand-pink" data-testid={`ex-del-${ex.id}`}>
                 <Trash2 size={18} />
