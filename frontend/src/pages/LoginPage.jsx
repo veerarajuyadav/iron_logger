@@ -25,21 +25,21 @@ export default function LoginPage() {
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
       {/* Hero */}
       <div
-        className="hidden md:block relative bg-cover bg-center"
+        className="relative bg-cover bg-center h-44 md:h-auto"
         style={{
           backgroundImage:
             "linear-gradient(135deg, rgba(9,9,11,.65), rgba(255,0,85,.35)), url('https://images.pexels.com/photos/11433060/pexels-photo-11433060.jpeg')",
         }}
       >
-        <div className="absolute inset-0 flex flex-col justify-between p-10">
+        <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-10">
           <div>
-            <div className="font-display text-7xl text-brand-yellow leading-none drop-shadow-[4px_4px_0px_#000]">
+            <div className="font-display text-4xl md:text-7xl text-brand-yellow leading-none drop-shadow-[4px_4px_0px_#000]">
               IRON
             </div>
-            <div className="font-display text-7xl text-white leading-none drop-shadow-[4px_4px_0px_#000]">
+            <div className="font-display text-4xl md:text-7xl text-white leading-none drop-shadow-[4px_4px_0px_#000]">
               LOGGER
             </div>
-            <div className="mt-4 inline-block bg-brand-cyan text-black font-bold uppercase tracking-widest px-3 py-1 border-2 border-black shadow-comic">
+            <div className="mt-2 md:mt-4 inline-block bg-brand-cyan text-black font-bold uppercase tracking-widest px-2 md:px-3 py-0.5 md:py-1 border-2 border-black shadow-comic text-[10px] md:text-xs">
               POW! Track Every Rep.
             </div>
           </div>
