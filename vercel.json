@@ -15,7 +15,7 @@
   "routes": [
     {
       "src": "/_/backend/(.*)",
-      "dest": "backend/server.py"
+      "dest": "backend/server.py?/$1"
     },
     {
       "handle": "filesystem"
