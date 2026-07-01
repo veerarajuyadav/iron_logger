@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import api from "../lib/api";
 import { useAuth } from "../lib/AuthContext";
-import { Plus, Trash2, Save, CheckCircle2, Copy } from "lucide-react";
+import { Plus, Trash2, Save, CheckCircle2 } from "lucide-react";
 
 const MUSCLE_GROUPS = ["chest", "back", "legs", "shoulders", "arms", "core", "cardio", "other"];
 
@@ -23,10 +23,7 @@ export default function WorkoutLoggerPage() {
   const [notes, setNotes] = useState("");
   const [exercises, setExercises] = useState([]); // array of WorkoutExercise
   const [library, setLibrary] = useState([]);
-  const [pastWorkouts, setPastWorkouts] = useState([]);
-  const [showWorkoutPicker, setShowWorkoutPicker] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [newExName, setNewExName] = useState("");
   const [newExGroup, setNewExGroup] = useState("chest");
   const [saving, setSaving] = useState(false);
@@ -42,11 +39,8 @@ export default function WorkoutLoggerPage() {
         setNotes(w.notes || "");
         setExercises(w.exercises || []);
       });
-    } else {
-      if (!title) {
-        setTitle(`Workout · ${new Date(date).toLocaleDateString(undefined, { weekday: "short" })}`);
-      }
-      api.get("/workouts", { params: { limit: 20 } }).then((r) => setPastWorkouts(r.data));
+    } else if (!title) {
+      setTitle(`Workout · ${new Date(date).toLocaleDateString(undefined, { weekday: "short" })}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
@@ -250,62 +244,50 @@ export default function WorkoutLoggerPage() {
           </button>
         ) : (
           <div className="panel p-4 space-y-3" data-testid="exercise-picker">
-            <div className="font-display text-2xl">Pick Exercise</div>
-            <input
-              data-testid="exercise-search"
-              className="input-comic w-full"
-              placeholder="Search exercises..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              autoFocus
-            />
-            {searchQuery && (
-              <div className="max-h-64 overflow-y-auto space-y-1">
-                {library
-                  .filter((ex) => ex.name.toLowerCase().includes(searchQuery.toLowerCase()))
-                  .map((ex) => (
-                    <button
-                      key={ex.id}
-                      onClick={() => { addExerciseFromLibrary(ex); setSearchQuery(""); }}
-                      className="w-full border-2 border-brand-line p-3 text-left hover:border-brand-yellow"
-                      data-testid={`pick-exercise-${ex.id}`}
-                    >
-                      <div className="font-bold uppercase text-sm">{ex.name}</div>
-                      <span className="tag-comic bg-brand-cyan text-black mt-1 capitalize">{ex.muscle_group}</span>
-                    </button>
-                  ))}
-                {library.filter((ex) => ex.name.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
-                  <div className="border-t-2 border-brand-line pt-3 mt-3">
-                    <div className="text-xs uppercase font-bold tracking-widest mb-1">Not found — create new</div>
-                    <div className="flex gap-2 flex-wrap">
-                      <input
-                        data-testid="new-exercise-name"
-                        className="input-comic flex-1 min-w-[160px]"
-                        placeholder="Exercise name"
-                        value={newExName}
-                        onChange={(e) => setNewExName(e.target.value)}
-                      />
-                      <select
-                        data-testid="new-exercise-group"
-                        className="input-comic max-w-[140px]"
-                        value={newExGroup}
-                        onChange={(e) => setNewExGroup(e.target.value)}
-                      >
-                        {MUSCLE_GROUPS.map((g) => (
-                          <option key={g} value={g}>
-                            {g}
-                          </option>
-                        ))}
-                      </select>
-                      <button onClick={createAndAddExercise} className="btn-comic-cyan" data-testid="create-exercise-btn">
-                        Create & Add
-                      </button>
-                    </div>
-                  </div>
-                )}
+            <div className="font-display text-2xl">Pick or Create Exercise</div>
+            {library.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-h-64 overflow-y-auto">
+                {library.map((ex) => (
+                  <button
+                    key={ex.id}
+                    onClick={() => addExerciseFromLibrary(ex)}
+                    className="border-2 border-brand-line p-3 text-left hover:border-brand-yellow"
+                    data-testid={`pick-exercise-${ex.id}`}
+                  >
+                    <div className="font-bold uppercase text-sm">{ex.name}</div>
+                    <span className="tag-comic bg-brand-cyan text-black mt-1">{ex.muscle_group}</span>
+                  </button>
+                ))}
               </div>
             )}
-            <button onClick={() => { setShowPicker(false); setSearchQuery(""); }} className="text-brand-mute text-xs uppercase">
+            <div className="border-t-2 border-brand-line pt-3">
+              <div className="text-xs uppercase font-bold tracking-widest mb-1">Or create new</div>
+              <div className="flex gap-2 flex-wrap">
+                <input
+                  data-testid="new-exercise-name"
+                  className="input-comic flex-1 min-w-[160px]"
+                  placeholder="Exercise name"
+                  value={newExName}
+                  onChange={(e) => setNewExName(e.target.value)}
+                />
+                <select
+                  data-testid="new-exercise-group"
+                  className="input-comic max-w-[140px]"
+                  value={newExGroup}
+                  onChange={(e) => setNewExGroup(e.target.value)}
+                >
+                  {MUSCLE_GROUPS.map((g) => (
+                    <option key={g} value={g}>
+                      {g}
+                    </option>
+                  ))}
+                </select>
+                <button onClick={createAndAddExercise} className="btn-comic-cyan" data-testid="create-exercise-btn">
+                  Create & Add
+                </button>
+              </div>
+            </div>
+            <button onClick={() => setShowPicker(false)} className="text-brand-mute text-xs uppercase">
               Cancel
             </button>
           </div>
