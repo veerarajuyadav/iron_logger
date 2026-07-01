@@ -1,33 +1,130 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import api from "../lib/api";
-import { Plus, Trash2 } from "lucide-react";
+import { searchExercises, filterByGroup, mapApiMuscleToGroup } from "../lib/ninjasApi";
+import { Plus, Trash2, Search } from "lucide-react";
 
-const MUSCLE_GROUPS = ["chest", "back", "legs", "shoulders", "arms", "core", "cardio", "other"];
+const MUSCLE_GROUPS = ["all", "chest", "back", "legs", "shoulders", "arms", "core", "cardio", "other"];
 
 export default function ExercisesPage() {
   const [items, setItems] = useState([]);
   const [name, setName] = useState("");
-  const [group, setGroup] = useState("chest");
+  const [group, setGroup] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [searching, setSearching] = useState(false);
+  const [noKey, setNoKey] = useState(false);
+  const inputRef = useRef(null);
+  const dropdownRef = useRef(null);
 
   const load = async () => {
     const { data } = await api.get("/exercises");
     setItems(data);
   };
+
   useEffect(() => {
     load();
+    if (!process.env.REACT_APP_NINJAS_API_KEY) {
+      setNoKey(true);
+    }
   }, []);
+
+  // debounced search
+  useEffect(() => {
+    if (noKey) return;
+
+    const query = searchQuery.trim();
+    if (!query && group === "all") {
+      setSearchResults([]);
+      return;
+    }
+
+    const timer = setTimeout(async () => {
+      setSearching(true);
+      try {
+        const results = await searchExercises({ name: query || undefined });
+        const filtered = filterByGroup(results || [], group);
+        setSearchResults(filtered);
+        setShowDropdown(true);
+      } catch (e) {
+        if (e.response?.status === 401 || e.response?.status === 403) {
+          setNoKey(true);
+        }
+        setSearchResults([]);
+      } finally {
+        setSearching(false);
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery, group, noKey]);
+
+  // close dropdown on outside click
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target) &&
+        inputRef.current &&
+        !inputRef.current.contains(e.target)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const handleFocus = async () => {
+    if (noKey) return;
+
+    if (searchResults.length === 0 && !searchQuery.trim()) {
+      setSearching(true);
+      try {
+        const results = await searchExercises({});
+        const filtered = filterByGroup(results || [], group);
+        setSearchResults(filtered);
+      } catch (e) {
+        if (e.response?.status === 401 || e.response?.status === 403) {
+          setNoKey(true);
+        }
+        setSearchResults([]);
+      } finally {
+        setSearching(false);
+      }
+    }
+    setShowDropdown(true);
+  };
+
+  const selectExercise = (exercise) => {
+    setName(exercise.name);
+    setSearchQuery(exercise.name);
+    setGroup(mapApiMuscleToGroup(exercise.muscle));
+    setShowDropdown(false);
+  };
 
   const add = async (e) => {
     e.preventDefault();
-    if (!name.trim()) return;
+    if (!name.trim() || group === "all") return;
     await api.post("/exercises", { name: name.trim(), muscle_group: group });
     setName("");
+    setSearchQuery("");
     load();
   };
+
   const del = async (id) => {
     await api.delete(`/exercises/${id}`);
     load();
   };
+
+  const handleGroupChange = (val) => {
+    setGroup(val);
+    if (val !== "all") return;
+    setName("");
+    setSearchQuery("");
+  };
+
+  const canAdd = name.trim() && group !== "all";
 
   return (
     <div className="space-y-6" data-testid="exercises-page">
@@ -40,13 +137,61 @@ export default function ExercisesPage() {
       </div>
 
       <form onSubmit={add} className="panel p-4 flex flex-wrap items-end gap-3" data-testid="exercise-form">
-        <div className="flex-1 min-w-[180px]">
+        <div className="flex-1 min-w-[200px] relative">
           <label className="block text-xs font-bold uppercase tracking-widest mb-1">Name</label>
-          <input data-testid="ex-name-input" className="input-comic" value={name} onChange={(e) => setName(e.target.value)} placeholder="Bench Press" required />
+          <div className="relative">
+            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-mute pointer-events-none" />
+            <input
+              ref={inputRef}
+              data-testid="ex-name-input"
+              className="input-comic pl-9"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setName(e.target.value);
+              }}
+              onFocus={handleFocus}
+              placeholder={noKey ? "Type exercise name..." : "Search exercises..."}
+              required
+            />
+          </div>
+          {showDropdown && !noKey && (searchResults.length > 0 || searching) && (
+            <div
+              ref={dropdownRef}
+              className="absolute z-50 mt-1 w-full max-h-60 overflow-y-auto panel p-1 shadow-comic border-2 border-brand-line"
+            >
+              {searching ? (
+                <div className="p-3 text-sm text-brand-mute uppercase tracking-wider">Searching...</div>
+              ) : (
+                searchResults.map((ex, i) => (
+                  <button
+                    key={`${ex.name}-${i}`}
+                    type="button"
+                    className="w-full text-left px-3 py-2 text-sm rounded hover:bg-brand-ink/5 transition-colors"
+                    onClick={() => selectExercise(ex)}
+                    data-testid={`search-result-${i}`}
+                  >
+                    <span className="font-semibold text-sm">{ex.name}</span>
+                    <span className="ml-2 tag-comic bg-brand-cyan text-black text-[10px]">{mapApiMuscleToGroup(ex.muscle)}</span>
+                  </button>
+                ))
+              )}
+            </div>
+          )}
+          {noKey && (
+            <p className="text-[10px] text-brand-pink mt-1 uppercase tracking-wider">
+              Set REACT_APP_NINJAS_API_KEY to enable exercise search.
+            </p>
+          )}
         </div>
         <div>
           <label className="block text-xs font-bold uppercase tracking-widest mb-1">Group</label>
-          <select data-testid="ex-group-select" className="input-comic" value={group} onChange={(e) => setGroup(e.target.value)}>
+          <select
+            data-testid="ex-group-select"
+            className="input-comic"
+            value={group}
+            onChange={(e) => handleGroupChange(e.target.value)}
+          >
             {MUSCLE_GROUPS.map((g) => (
               <option key={g} value={g}>
                 {g}
@@ -54,7 +199,11 @@ export default function ExercisesPage() {
             ))}
           </select>
         </div>
-        <button className="btn-comic" data-testid="ex-add-btn">
+        <button
+          className={`btn-comic ${!canAdd ? "opacity-50 cursor-not-allowed" : ""}`}
+          data-testid="ex-add-btn"
+          disabled={!canAdd}
+        >
           <Plus size={16} /> Add
         </button>
       </form>
