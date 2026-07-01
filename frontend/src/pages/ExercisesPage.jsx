@@ -35,7 +35,6 @@ export default function ExercisesPage() {
     const timer = setTimeout(() => {
       const results = searchLocal({ query, group });
       setSearchResults(results);
-      setShowDropdown(true);
     }, 150);
 
     return () => clearTimeout(timer);
@@ -113,11 +112,12 @@ export default function ExercisesPage() {
             <input
               ref={inputRef}
               data-testid="ex-name-input"
-              className="input-comic pl-9"
+              className="input-comic pl-9 min-h-[48px]"
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
                 setName(e.target.value);
+                setShowDropdown(true);
               }}
               onFocus={handleFocus}
               placeholder="Search exercises..."
@@ -133,7 +133,7 @@ export default function ExercisesPage() {
                 <button
                   key={`${ex.name}-${i}`}
                   type="button"
-                  className="w-full text-left px-3 py-2 text-sm rounded hover:bg-brand-ink/5 transition-colors"
+                  className="w-full text-left px-3 py-3 sm:py-2 text-sm rounded hover:bg-brand-ink/5 transition-colors"
                   onClick={() => selectExercise(ex)}
                   data-testid={`search-result-${i}`}
                 >
@@ -160,7 +160,7 @@ export default function ExercisesPage() {
           </select>
         </div>
         <button
-          className={`btn-comic ${!canAdd ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`btn-comic w-full sm:w-auto ${!canAdd ? "opacity-50 cursor-not-allowed" : ""}`}
           data-testid="ex-add-btn"
           disabled={!canAdd}
         >
