@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import api from "../lib/api";
-import { searchExercises, filterByGroup, mapApiMuscleToGroup } from "../lib/ninjasApi";
+import { searchLocal, mapToGroup } from "../lib/exerciseSearch";
 import { Plus, Trash2, Search } from "lucide-react";
 
 const MUSCLE_GROUPS = ["all", "chest", "back", "legs", "shoulders", "arms", "core", "cardio", "other"];
@@ -12,8 +12,6 @@ export default function ExercisesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [searching, setSearching] = useState(false);
-  const [noKey, setNoKey] = useState(false);
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
 
@@ -24,40 +22,24 @@ export default function ExercisesPage() {
 
   useEffect(() => {
     load();
-    if (!process.env.REACT_APP_NINJAS_API_KEY) {
-      setNoKey(true);
-    }
   }, []);
 
-  // debounced search
+  // search
   useEffect(() => {
-    if (noKey) return;
-
     const query = searchQuery.trim();
     if (!query && group === "all") {
       setSearchResults([]);
       return;
     }
 
-    const timer = setTimeout(async () => {
-      setSearching(true);
-      try {
-        const results = await searchExercises({ name: query || undefined });
-        const filtered = filterByGroup(results || [], group);
-        setSearchResults(filtered);
-        setShowDropdown(true);
-      } catch (e) {
-        if (e.response?.status === 401 || e.response?.status === 403) {
-          setNoKey(true);
-        }
-        setSearchResults([]);
-      } finally {
-        setSearching(false);
-      }
-    }, 300);
+    const timer = setTimeout(() => {
+      const results = searchLocal({ query, group });
+      setSearchResults(results);
+      setShowDropdown(true);
+    }, 150);
 
     return () => clearTimeout(timer);
-  }, [searchQuery, group, noKey]);
+  }, [searchQuery, group]);
 
   // close dropdown on outside click
   useEffect(() => {
@@ -75,23 +57,10 @@ export default function ExercisesPage() {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  const handleFocus = async () => {
-    if (noKey) return;
-
+  const handleFocus = () => {
     if (searchResults.length === 0 && !searchQuery.trim()) {
-      setSearching(true);
-      try {
-        const results = await searchExercises({});
-        const filtered = filterByGroup(results || [], group);
-        setSearchResults(filtered);
-      } catch (e) {
-        if (e.response?.status === 401 || e.response?.status === 403) {
-          setNoKey(true);
-        }
-        setSearchResults([]);
-      } finally {
-        setSearching(false);
-      }
+      const results = searchLocal({ query: "", group });
+      setSearchResults(results);
     }
     setShowDropdown(true);
   };
@@ -99,7 +68,7 @@ export default function ExercisesPage() {
   const selectExercise = (exercise) => {
     setName(exercise.name);
     setSearchQuery(exercise.name);
-    setGroup(mapApiMuscleToGroup(exercise.muscle));
+    setGroup(mapToGroup(exercise.primary_muscle));
     setShowDropdown(false);
   };
 
@@ -151,37 +120,28 @@ export default function ExercisesPage() {
                 setName(e.target.value);
               }}
               onFocus={handleFocus}
-              placeholder={noKey ? "Type exercise name..." : "Search exercises..."}
+              placeholder="Search exercises..."
               required
             />
           </div>
-          {showDropdown && !noKey && (searchResults.length > 0 || searching) && (
+          {showDropdown && searchResults.length > 0 && (
             <div
               ref={dropdownRef}
               className="absolute z-50 mt-1 w-full max-h-60 overflow-y-auto panel p-1 shadow-comic border-2 border-brand-line"
             >
-              {searching ? (
-                <div className="p-3 text-sm text-brand-mute uppercase tracking-wider">Searching...</div>
-              ) : (
-                searchResults.map((ex, i) => (
-                  <button
-                    key={`${ex.name}-${i}`}
-                    type="button"
-                    className="w-full text-left px-3 py-2 text-sm rounded hover:bg-brand-ink/5 transition-colors"
-                    onClick={() => selectExercise(ex)}
-                    data-testid={`search-result-${i}`}
-                  >
-                    <span className="font-semibold text-sm">{ex.name}</span>
-                    <span className="ml-2 tag-comic bg-brand-cyan text-black text-[10px]">{mapApiMuscleToGroup(ex.muscle)}</span>
-                  </button>
-                ))
-              )}
+              {searchResults.map((ex, i) => (
+                <button
+                  key={`${ex.name}-${i}`}
+                  type="button"
+                  className="w-full text-left px-3 py-2 text-sm rounded hover:bg-brand-ink/5 transition-colors"
+                  onClick={() => selectExercise(ex)}
+                  data-testid={`search-result-${i}`}
+                >
+                  <span className="font-semibold text-sm">{ex.name}</span>
+                  <span className="ml-2 tag-comic bg-brand-cyan text-black text-[10px]">{mapToGroup(ex.primary_muscle)}</span>
+                </button>
+              ))}
             </div>
-          )}
-          {noKey && (
-            <p className="text-[10px] text-brand-pink mt-1 uppercase tracking-wider">
-              Set REACT_APP_NINJAS_API_KEY to enable exercise search.
-            </p>
           )}
         </div>
         <div>

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import api from "../lib/api";
 import { useAuth } from "../lib/AuthContext";
-import { Plus, Trash2, Save, CheckCircle2 } from "lucide-react";
+import { Plus, Trash2, Save, CheckCircle2, Search } from "lucide-react";
+import { searchLocal, mapToGroup } from "../lib/exerciseSearch";
 
 const MUSCLE_GROUPS = ["chest", "back", "legs", "shoulders", "arms", "core", "cardio", "other"];
 
@@ -27,6 +28,11 @@ export default function WorkoutLoggerPage() {
   const [newExName, setNewExName] = useState("");
   const [newExGroup, setNewExGroup] = useState("chest");
   const [saving, setSaving] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const inputRef = useRef(null);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     api.get("/exercises").then((r) => setLibrary(r.data));
@@ -45,6 +51,54 @@ export default function WorkoutLoggerPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  // search
+  useEffect(() => {
+    const query = searchQuery.trim();
+    if (!query) {
+      setSearchResults([]);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      const results = searchLocal({ query, group: newExGroup });
+      setSearchResults(results);
+      setShowDropdown(true);
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery, newExGroup]);
+
+  // close dropdown on outside click
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target) &&
+        inputRef.current &&
+        !inputRef.current.contains(e.target)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const handleExFocus = () => {
+    if (searchResults.length === 0 && !searchQuery.trim()) {
+      const results = searchLocal({ query: "", group: newExGroup });
+      setSearchResults(results);
+    }
+    setShowDropdown(true);
+  };
+
+  const selectExercise = (exercise) => {
+    setNewExName(exercise.name);
+    setSearchQuery(exercise.name);
+    setNewExGroup(mapToGroup(exercise.primary_muscle));
+    setShowDropdown(false);
+  };
+
   const addExerciseFromLibrary = (ex) => {
     setExercises((arr) => [
       ...arr,
@@ -59,11 +113,21 @@ export default function WorkoutLoggerPage() {
     setLibrary((l) => [...l, data]);
     addExerciseFromLibrary(data);
     setNewExName("");
+    setSearchQuery("");
   };
 
   const removeExercise = (idx) => setExercises((arr) => arr.filter((_, i) => i !== idx));
   const addSet = (idx) =>
     setExercises((arr) => arr.map((e, i) => (i === idx ? { ...e, sets: [...e.sets, newSet()] } : e)));
+  const sanitize = (val, key) => {
+    if (val === "") return key === "rpe" ? null : 0;
+    let num = Number(val);
+    if (isNaN(num)) return null;
+    if (key === "reps") return Math.floor(Math.max(0, num));
+    if (key === "weight") return Math.max(0, Math.round(num * 10) / 10);
+    if (key === "rpe") return Math.min(10, Math.max(1, Math.round(num * 2) / 2));
+    return num;
+  };
   const updateSet = (eIdx, sIdx, key, val) =>
     setExercises((arr) =>
       arr.map((e, i) =>
@@ -71,7 +135,7 @@ export default function WorkoutLoggerPage() {
           ? {
               ...e,
               sets: e.sets.map((s, j) =>
-                j === sIdx ? { ...s, [key]: val === "" ? (key === "rpe" ? null : 0) : Number(val) } : s
+                j === sIdx ? { ...s, [key]: sanitize(val, key) } : s
               ),
             }
           : e
@@ -193,32 +257,46 @@ export default function WorkoutLoggerPage() {
                       <td>
                         <input
                           data-testid={`set-weight-${eIdx}-${sIdx}`}
-                          type="number"
-                          step="0.5"
-                          className="input-comic max-w-[120px]"
-                          value={s.weight}
-                          onChange={(e) => updateSet(eIdx, sIdx, "weight", e.target.value)}
+                          type="text"
+                          inputMode="decimal"
+                          className="input-comic w-full min-w-[80px]"
+                          value={s.weight || ""}
+                          onChange={(e) => {
+                            const raw = e.target.value;
+                            if (raw === "" || /^\d*\.?\d{0,1}$/.test(raw)) {
+                              updateSet(eIdx, sIdx, "weight", raw);
+                            }
+                          }}
                         />
                       </td>
                       <td>
                         <input
                           data-testid={`set-reps-${eIdx}-${sIdx}`}
-                          type="number"
-                          className="input-comic max-w-[100px]"
-                          value={s.reps}
-                          onChange={(e) => updateSet(eIdx, sIdx, "reps", e.target.value)}
+                          type="text"
+                          inputMode="numeric"
+                          className="input-comic w-full min-w-[80px]"
+                          value={s.reps || ""}
+                          onChange={(e) => {
+                            const raw = e.target.value;
+                            if (raw === "" || /^\d+$/.test(raw)) {
+                              updateSet(eIdx, sIdx, "reps", raw);
+                            }
+                          }}
                         />
                       </td>
                       <td>
                         <input
                           data-testid={`set-rpe-${eIdx}-${sIdx}`}
-                          type="number"
-                          step="0.5"
-                          min="1"
-                          max="10"
-                          className="input-comic max-w-[100px]"
+                          type="text"
+                          inputMode="decimal"
+                          className="input-comic w-full min-w-[80px]"
                           value={s.rpe ?? ""}
-                          onChange={(e) => updateSet(eIdx, sIdx, "rpe", e.target.value)}
+                          onChange={(e) => {
+                            const raw = e.target.value;
+                            if (raw === "" || /^\d{0,2}(\.?|\.5?)?$/.test(raw)) {
+                              updateSet(eIdx, sIdx, "rpe", raw);
+                            }
+                          }}
                           placeholder="—"
                         />
                       </td>
@@ -260,16 +338,45 @@ export default function WorkoutLoggerPage() {
                 ))}
               </div>
             )}
-            <div className="border-t-2 border-brand-line pt-3">
+              <div className="border-t-2 border-brand-line pt-3">
               <div className="text-xs uppercase font-bold tracking-widest mb-1">Or create new</div>
               <div className="flex gap-2 flex-wrap">
-                <input
-                  data-testid="new-exercise-name"
-                  className="input-comic flex-1 min-w-[160px]"
-                  placeholder="Exercise name"
-                  value={newExName}
-                  onChange={(e) => setNewExName(e.target.value)}
-                />
+                <div className="flex-1 min-w-[160px] relative">
+                  <div className="relative">
+                    <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-mute pointer-events-none" />
+                    <input
+                      ref={inputRef}
+                      data-testid="new-exercise-name"
+                      className="input-comic pl-9 w-full"
+                      placeholder="Search exercises..."
+                      value={searchQuery}
+                      onChange={(e) => {
+                        setSearchQuery(e.target.value);
+                        setNewExName(e.target.value);
+                      }}
+                      onFocus={handleExFocus}
+                    />
+                  </div>
+                  {showDropdown && searchResults.length > 0 && (
+                    <div
+                      ref={dropdownRef}
+                      className="absolute z-50 mt-1 w-full max-h-60 overflow-y-auto panel p-1 shadow-comic border-2 border-brand-line"
+                    >
+                      {searchResults.map((ex, i) => (
+                        <button
+                          key={`${ex.name}-${i}`}
+                          type="button"
+                          className="w-full text-left px-3 py-2 text-sm rounded hover:bg-brand-ink/5 transition-colors"
+                          onClick={() => selectExercise(ex)}
+                          data-testid={`search-result-${i}`}
+                        >
+                          <span className="font-semibold text-sm">{ex.name}</span>
+                          <span className="ml-2 tag-comic bg-brand-cyan text-black text-[10px]">{mapToGroup(ex.primary_muscle)}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <select
                   data-testid="new-exercise-group"
                   className="input-comic max-w-[140px]"
